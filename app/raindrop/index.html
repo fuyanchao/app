@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>雨滴</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+article.index{ background-image:url(images/bg.jpg);}
+
+.sky{ position:absolute; left:0; top:0; width:100%; height:100%; overflow:hidden; pointer-events:none;}
+.sky i{position: absolute;display: block; width: .2rem; height: .2rem; background: rgba(255,255,255,.03) -webkit-radial-gradient(center 75%, ellipse contain, #ffffff, rgba(255,255,255,0) 60%);border-radius: 50%; box-shadow: inset 0 0 .12rem rgba(0,0,0,.5), inset 0 -0.02rem 12rem rgba(0,0,0,.4),  inset 0 .16rem .06rem rgba(0,0,0,.3), inset 0 .2rem 0.06rem rgba(255,255,255,.1), 0 0.06rem .12rem rgba(0,0,0,.5); will-change:transform;}.
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+
+<article class="index"></article>
+
+<div class="sky" id="skyBox"></div>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.raindrop.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/*
+	 * raindropOn(option):开启插件
+	 * 参数：
+	 * num:数量，默认值50
+	 * 
+	 * raindropOff()：关闭插件
+	 * 
+    */
+   
+   
+	$('#skyBox').raindropOn({num:50});
+	
+	//停止
+	//setTimeout(function(){$('#skyBox').raindropOff();},3000);
+	
+});
+</script>
+</body>
+</html>

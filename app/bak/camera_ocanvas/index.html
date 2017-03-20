@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>拍照DEMO</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="shortcut icon" href="favicon.ico">
+<script>
+//平台检测，判断浏览器、操作系统环境
+var os=detectOS();
+function detectOS() {
+	var	userAgent=navigator.userAgent;
+	console.log(userAgent);
+	var os = {};
+	os.android = userAgent.match(/(Android)\s+([\d.]+)/) || userAgent.match(/Silk-Accelerated/) ? true : false;
+	os.androidICS = os.android && userAgent.match(/(Android)\s4/) ? true : false;
+	os.ipad = userAgent.match(/(iPad).*OS\s([\d_]+)/) ? true : false;
+	os.iphone = !os.ipad && userAgent.match(/(iPhone\sOS)\s([\d_]+)/) ? true : false;
+	os.ios = os.ipad || os.iphone;
+	os.wp=userAgent.match(/Windows Phone/) || userAgent.match(/IEMobile/) ? true : false;
+	os.supportsTouch = ((window.DocumentTouch && document instanceof window.DocumentTouch) || 'ontouchstart' in window);
+	if(os.ios) os.iosVer=parseInt(userAgent.match(/OS \d_/)[0].match(/\d/)[0]);
+	else os.iosVer=0;
+	return os;
+}//end func
+//判断是否处于微信内置浏览器
+var isWeixin=detectWeixin();
+function detectWeixin(){
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i)=="micromessenger") return true;
+	else return false;
+}//end func
+</script>
+<link rel="stylesheet" type="text/css" href="css/iphone.css" />
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<div id="loadBox"><span></span></div>
+<article class="camera">
+	<div class="canvas">
+    <div class="top"><span>初始默认宝宝头像</span></div>
+        	<div class="imgBox">
+            	<div class="shell"></div>
+                <div class="sign"><img src="images/camera/icion.png"><span>请务必将脸部对准虚线圆圈处</span></div>
+                <img src="images/camera/baby.png" class="baby">
+                <img src="images/camera/equip.png" class="equip">
+                <img src="images/camera/focus.png" class="focus">
+          	</div>
+            <div class="panel">
+            	<a class="btnR"></a>
+                <a class="btnSub"></a>
+            	<a class="btnAdd"></a>
+            </div>
+        	<div class="btns">
+                <a class="btnCamera"><img src="images/camera/btn_camera.png"></a>
+                <a class="btnCf" id="btnCf" ><img src="images/camera/btn_cf.png"></a>
+            </div>
+            <div class="border"></div>
+	</div>
+    <a class="btnNext"><img src="images/camera/btn_next.png"></a>
+</article>
+<img src="images/common/logo.png" class="logo">
+<div id="alertBox"><p class="text"></p><p class="btn"><a class="close">确认</a></p></div>
+<div id="turnBox"><span></span></div>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script type="text/javascript" src="js/base/jquery.js"></script>
+<script type="text/javascript" src="js/base/framwork.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/base/ocanvas.js"></script>
+<script type="text/javascript" src="js/camera.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>滑动式网页模板-timeline</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" type="text/css" href="css/iphone.css" />
+<script>
+//平台检测
+var os=detectOS();
+//判断浏览器、操作系统环境
+function detectOS() {
+	var	userAgent=navigator.userAgent;
+	console.log(userAgent);
+	var os = {};
+	os.android = userAgent.match(/(Android)\s+([\d.]+)/) || userAgent.match(/Silk-Accelerated/) ? true : false;
+	os.androidICS = os.android && userAgent.match(/(Android)\s4/) ? true : false;
+	os.ipad = userAgent.match(/(iPad).*OS\s([\d_]+)/) ? true : false;
+	os.iphone = !os.ipad && userAgent.match(/(iPhone\sOS)\s([\d_]+)/) ? true : false;
+	os.ios = os.ipad || os.iphone;
+	os.wp=userAgent.match(/Windows Phone/) || userAgent.match(/IEMobile/) ? true : false;
+	os.supportsTouch = ((window.DocumentTouch && document instanceof window.DocumentTouch) || 'ontouchstart' in window);
+	if(os.ios) os.iosVer=parseInt(userAgent.match(/OS \d_/)[0].match(/\d/)[0]);
+	else os.iosVer=0;
+	return os;
+}//end func
+//是否处于微信内部浏览器
+var isWeixin=detectWeixin();
+function detectWeixin(){
+	var ua = navigator.userAgent.toLowerCase();
+	if(ua.match(/MicroMessenger/i)=="micromessenger") return true;
+	else return false;
+}//end func
+</script>
+</head>
+<body>
+<div id="loadBox"><span></span></div>
+<div class="wrap">
+	
+<article class="container">
+    
+    <section class="index">
+    	<img src="images/index/logo.png" class="logo">
+        <div class="slog">
+        	<p class="img"><img src="images/index/slog.png"></p>
+            <p class="txt">探索<span>panthère</span>系列的历史</p>
+        </div>
+        <img src="images/common/ar.png" class="ar" id="ar">
+    </section>
+    
+	<section class="page_a">
+    	<img src="images/page_a/p1.png" class="p1">
+        <img src="images/page_a/p2.png" class="p2">
+        <img src="images/page_a/p3.png" class="p3">
+    	<h3><img src="images/page_a/letter.png"></h3>
+        <h4><img src="images/page_a/text.png"></h4>
+    </section>
+    
+    <section class="page_b">
+    	<img src="images/page_b/p2.png" class="p2">
+        <img src="images/page_b/p1.png" class="p1">
+    	<h3><img src="images/page_b/letter.png"></h3>
+        <h4><img src="images/page_b/text.png"></h4>
+    </section>
+    
+    <section class="page_c">
+    	<img src="images/page_c/p1.png" class="p1">
+    	<h3><img src="images/page_c/letter.png"></h3>
+        <h4><img src="images/page_c/text.png"></h4>
+    </section>
+    
+    <section class="end">
+    	<img src="images/index/logo.png" class="logo">
+    </section>
+    
+</article>    
+    
+
+</div>
+
+<aside id="shareBox"><img src="images/common/share.png"></aside>
+<div id='videoBox'><a class='close'></a></div>
+<div id="alertBox"><p class="text"></p><p class="btn"><a class="close">确认</a></p></div>
+<div id="turnBox"><span></span></div>
+<!--javascrip -->
+
+<script type="text/javascript" src="js/base/jquery.js"></script>
+<script type="text/javascript" src="js/base/framwork.js"></script>
+<script type="text/javascript" src="js/base/timeline.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
+</body>
+</html>

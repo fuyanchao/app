@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>自动播放背景音乐</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+</head>
+<body>
+<style>
+a.bgmBtn{ position: relative; left: 0; top: 0; display:block; width:1rem; height:1rem; line-height: 1rem; margin:.2rem auto;}
+a.bgmPlay{  background-image: url(images/common/sound_play.png);}
+a.bgmStop{  background-image: url(images/common/sound_stop.png)}
+a.btnNext{display: block; width: 70%; height: 1rem; line-height: 1rem; font-size: .24rem; text-align: center; background: #000; color: #fff; margin:1rem auto;}
+a.btnMusic{display: block; width: 70%; height: 1rem; line-height: 1rem; font-size: .24rem; text-align: center; background: #000; color: #fff; margin:1rem auto;}
+</style>
+
+<a class="bgmBtn"></a>
+
+<a class="btnNext">页面跳转后背景音乐依旧不中断播放</a>
+
+<a class="btnMusic">同时播放前景音效</a>
+
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="../../iphone/js/base/audio.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/* iaudio 方法集说明
+	 * 
+	 * on(list,option)：开启音效
+		 * 参数：
+		 * list:音频列表，数组格式，必填项
+		 * list.src:音频文件地址
+		 * list.loop:是否循环播放，默认值0
+		 * list.volume:音量，默认值1
+		 * list.currentTime:当前播放位置，默认值0
+		 * list.autoPlay：加载完毕自动播放，默认值0
+		 * list.continuePlay：暂停后继续播放，默认值0
+		 * list.onLoaded：加载完毕的callback
+		 * list.onEnded：播放完毕的callback
+		 * list.onPlay：开始播放的callback
+		 * list.onPause：暂停播放的callback
+		 * option.webAudio:是否 web audio 方式，默认值1
+		 * option.onProgress:队列加载回调
+		 * option.onComplete:队列加载完成回调
+		 
+	 * 
+	 * 
+	 * bgm(option)：开启背景音乐
+		 * 参数：
+		 * option.src:背景音乐文件地址列表
+		 * option.btn:背景音乐按钮对象，默认值$('a.bgmBtn')
+		 * option.playClassName:背景音乐按钮播放状态classname，默认值 'bgmPlay'
+		 * option.stopClassName:背景音乐暂停播放状态classname，默认值 'bgmStop'
+	 * 
+	 */	
+	
+	//sound
+	var soundList,soundBgm;
+	
+	sound_handler();
+	
+	//----------------------------------------加载声音及处理----------------------------------------
+	function sound_handler(){
+		soundBgm=iaudio.bgm({src:'sound/bgm.mp3',onLoaded:bgm_loaded_complete});
+		soundList=iaudio.on([{src:'sound/sound.mp3'}],{onProgress:soundList_loaded_progress,onComplete:soundList_loaded_complete});
+	}//end func
+	
+	function bgm_loaded_complete(){
+		console.log('bgm load complete');
+	}//edn func
+	
+	function soundList_loaded_progress(progress){
+		console.log('progress:'+progress);
+	}//edn func
+	
+	function soundList_loaded_complete(){
+		init_handler();
+	}//edn func
+
+	
+	function init_handler(){
+		$('a.btnNext').one('touchend',function(e){
+			sessionStorage.bgmPlay=soundBgm.bgmPlay;
+			sessionStorage.bgmTime=soundBgm.bgmPlay?soundBgm.currentTime+soundBgm.context.currentTime-soundBgm.startTime:soundBgm.currentTime;
+			location.href='index.html';
+		});
+		
+		
+		$('a.btnMusic').on('touchend',function(e){
+			if(!$(this).hasClass('playing')){
+				$(this).addClass('playing');
+				soundList.sound.play();
+				$(this).html('停止前景音效');
+			}//end if
+			else{
+				$(this).removeClass('playing');
+				soundList.sound.pause();
+				$(this).html('同时播放前景音效');
+			}//end else
+		});
+		
+	}//end func
+	
+});
+</script>
+</body>
+</html>

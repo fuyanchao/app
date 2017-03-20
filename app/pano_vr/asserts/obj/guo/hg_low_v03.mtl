@@ -1,0 +1,10 @@
+# MTL written from hg_low_v03.obj
+newmtl Guo
+Kd 1 1 1
+Ns 4096
+d 1
+illum 2
+Ka 0 0 0
+Ks 1 1 1
+map_Kd 003.jpg
+map_Ks 003.jpg

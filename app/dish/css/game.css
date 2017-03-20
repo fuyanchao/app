@@ -1,0 +1,48 @@
+﻿article.game{ background-image:url(../images/game/bg.jpg);}
+article.game *{will-change:transform;}
+article.game>.player{ position:absolute; left:0; top:0; width:2.16rem; height:1.36rem; background-image:url(../images/game/player.png); }
+article.game>.player i{ display:block; position:absolute; width:44%; height:20%; left:0; top:0; background:rgba(255,0,0,0);}
+article.game>.player b{display:block; position:absolute; width:100%; height:100%; left:0; top:0; background-image:url(../images/game/player_light.png);  display:none;}
+article.game>.obj{ position:absolute; left:0; top:0; width:100%;}
+article.game>.obj span{ display:block; position:absolute; left:0; top:0;  width:1rem; height:0.85rem; -webkit-transform-origin:center top;}
+article.game>.obj span img{ width:100%; height:100%; position:absolute; left:0; top:0; -webkit-user-select:​ none; pointer-events:none;}
+article.game>.obj span b{display:block; position:absolute; left:35%; top:-.5rem; width:30%; height:1.1rem; background-image:url(../images/game/wind.png);  }
+article.game>.obj span i{ position:absolute; display:block; background:rgba(255,255,0,0); width:80%; height:70%; left:10%; top:15%;}
+article.game>.res{ position:absolute; left:0; top:0; width:100%;}
+article.game>.res span{ display:block; position:absolute; left:0; top:0;  width:1rem; height:.85rem; -webkit-transform-origin:center bottom;}
+article.game>.res span img{width:100%; height:100%; position:absolute; left:0; top:0; -webkit-user-select:​ none; pointer-events:none;}
+article.game>.sign{ position:absolute; right:.2rem; top:.2rem; display:none;}
+article.game>.sign span{ color:#ffc000; font-size:.28rem; text-shadow:0.02rem 0.02rem 0.02rem #000;}
+article.game>.count{ position:absolute; left:0; top:40%; width:100%;  display:none;}
+article.game>.count h3{text-align:center; font-weight:bolder; color:#fff; text-shadow:0 0 0.2rem #888; font-size:1.6rem;}
+article.game>.count h4{text-align:center; font-weight:bolder; color:#fff; text-shadow:0 0 0.6rem #888; font-size:.4rem;}
+article.game>.panel{ position:absolute; left:0; top:0; width:100%; }
+article.game>.panel .panelbar{ width:100%; height:.6rem; background:#008bf1; position:relative; }
+article.game>.panel .panelbar p{ display:block; position:absolute;}
+article.game>.panel .panelbar .time{ position:absolute; right:.4rem; bottom:0.1rem; width:50%; height:.24rem; padding:0.04rem 0.1rem 0.04rem 0.04rem; border:0.04rem solid #fff; border-radius:.28rem; background:#7dcfff;}
+article.game>.panel>.panelbar .time span.bar{display:inline-block; float:left; width:82%; height:.24rem; background:#0088f4; border-radius:.2rem; position:relative; box-shadow:inset 0.02rem 0.02rem 0.04rem #333;}
+article.game>.panel>.panelbar .time span.bar i{ position:absolute; width:0; height:100%; background:#fff; border-top-left-radius:.2rem; border-bottom-left-radius:.2rem; box-shadow:inset 0.02rem 0.02rem 0.04rem #333;}
+article.game>.panel>.panelbar .time span.bar b{ position:absolute; left:0; top:-0.08rem; width:.4rem; height:.4rem; background-image:url(../images/game/time_handle.png);  border-radius:50%; box-shadow:0.02rem 0.02rem 0.06rem #333;}
+article.game>.panel>.panelbar .time span.num{ display:inline-block; float:right; margin-top:-0.06rem;}
+article.game>.panel>.panelbar .time span.num i{color:#fff; font-size:.3rem; font-family:Arial;}
+article.game>.panel>.panelbar .score{ left:.4rem; bottom:0.1rem; width:24%; height:.24rem; padding:0.04rem; border:0.04rem solid #fff; border-radius:.28rem; background:#36d9ff;}
+article.game>.panel>.panelbar .score span.num{ display:inline-block; float:right; text-align:center; width:70%; height:.24rem; border-radius:0.1rem; background:#2798b3; position:relative; }
+article.game>.panel>.panelbar .score span.num i{font-size:.24rem; color:#fff; position:absolute; left:0; top:-0.02rem; width:100%;}
+article.game>.panel>.panelbar .score span.disc{ display:inline-block; position:absolute; left:-0.1rem; top:-0.04rem; width:.4rem; height:.4rem; background-image:url(../images/game/score_disc.png);  border-radius:50%; box-shadow:0.02rem 0.02rem 0.06rem #333;}
+article.game>.panel>.taskbar{ width:100%; height:2rem; background-image:url(../images/game/task_bg.png);  position:relative; }
+article.game>.panel>.taskbar h3{ text-align:center; margin-bottom:0.1rem; padding-top:0.06rem;}
+article.game>.panel>.taskbar h3 img{ width:40%;}
+article.game>.panel>.taskbar p.sign{ width:100%; text-align:center; font-size:.2rem; color:#fff; text-shadow:1px 1px 1px #333; margin-top:0.06rem;}
+article.game>.panel>.taskbar .tasks{ width:100%; height:.76rem; position:relative;}
+article.game>.panel>.taskbar .tasks .boxMask{ width:100%; height:100%; margin:0 auto; position:relative; overflow:hidden;}
+article.game>.panel>.taskbar .tasks .boxMask ul{ height:100%; position:absolute;}
+article.game>.panel>.taskbar .tasks .boxMask ul li{ float:left; margin:0 0.1rem; width:2.96rem; height:.68rem; background: -webkit-linear-gradient(top, rgba(87,218,243,1) 1%,rgba(33,194,235,1) 100%); border:0.02rem solid #fff; border-radius:0.1rem; box-shadow:0 0 0.06rem #888; text-align:center; opacity:0.3;}
+article.game>.panel>.taskbar .tasks .boxMask ul li.active{ opacity:1;}
+article.game>.panel>.taskbar .tasks .boxMask ul li img{ display:inline-block; width:.66rem; margin-top:-.4rem;}
+article.game>.panel>.taskbar .tasks .boxMask ul li span{ color:#000; font-size:.6rem; font-weight:bolder;}
+article.game>.icon{ display:block; position:absolute; left:0; top:0; font-size:.4rem; font-weight:bolder; color:#f00;}
+article.game>.icon_fall{ font-size:1rem;}
+article.game>.icon_succ{font-size:1rem;}
+article.game>.speedup{ position:absolute; left:50%; top:0; width:1.5rem; height:1.68rem; padding:.8rem 1rem 0 .5rem; margin-left:-1.5rem; background-image:url(../images/game/speed_bg.png);  display:none; pointer-events:none;}
+article.game>.speedup p{ text-align:center; font-weight:bolder; color:#fff; text-shadow: 0.02rem 0 0 #000,-0.02rem 0 0 #000, 0 0.02rem 0 #000, 0 -0.02rem 0 #000; font-size:.24rem;}
+article.game>.speedup p.line img{ width:100%;}

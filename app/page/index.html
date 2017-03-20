@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>滑动式网页</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+
+article.container section{ width:100%; height:100%; overflow: hidden; position:relative;}
+article.container .boxCont{width:100%; height:100%;}
+article.container .moving{will-change:transform;}
+
+section{ background-position:top center; background-size:cover; position:relative; overflow:hidden;}
+section>h3,section>h4,section>img{ position:absolute; background-size:100% 100%; display:block;}
+section>h3>img,section>h4>img{ width:100%;}
+section>.bg{ width:100%; height:100%; background-position:center center; background-size:cover;}
+
+section.index{ background: linear-gradient(to bottom, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); background: -webkit-linear-gradient(top, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%);}
+section.index img.logo{ position:absolute; left:50%; top:12%; width:36%; margin-left:-18%; opacity:0}
+section.index .slog{ position:absolute; left:0; top:36%; width:100%; transform:scale(0.9); -webkit-transform:scale(0.9); opacity:0;}
+section.index .slog p{ text-align:center;}
+section.index .slog p.img{ margin-bottom:.3rem;}
+section.index .slog p.img img{width:60%;}
+section.index .slog p.txt{ font-size:.4rem; }
+section.index .slog p.txt span{ text-transform:uppercase; font-family:Arial;}
+section.index img.ar{ position:absolute; left:50%; bottom:6%; width:10%; margin-left:-5%; -webkit-animation:ar 2s ease-in-out infinite;}
+
+section.page_a{ background: linear-gradient(to bottom, rgba(245,245,246,1) 0%,rgba(198,201,206,1) 100%); background: -webkit-linear-gradient(top, rgba(245,245,246,1) 0%,rgba(198,201,206,1) 100%);}
+section.page_a>h3{ left:0%; bottom:0%; width:36%;}
+section.page_a>h4{ left:23%; bottom:13%; width:54%;}
+section.page_a>img.p1{ left:19%; top:0%; width:16%;}
+section.page_a>img.p2{ left:50%; top:0%; width:26%;}
+section.page_a>img.p3{ left:30%; top:2%; width:10%;}
+
+section.page_b{ background: linear-gradient(to bottom, rgba(32,42,55,1) 0%,rgba(2,2,3,1) 100%); background: -webkit-linear-gradient(top, rgba(32,42,55,1) 0%,rgba(2,2,3,1) 100%);}
+section.page_b>h3{ left:56%; top:0%; width:35%;}
+section.page_b>h4{ right:46%; top:2%; width:44%;}
+section.page_b>img.p1{ left:15%; bottom:0%; width:64%;}
+section.page_b>img.p2{ left:39%; bottom:25%; width:40%;}
+
+section.page_c{ background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(184,188,192,1) 100%); background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(184,188,192,1) 100%);}
+section.page_c>h3{ left:0%; bottom:0%; width:55%;}
+section.page_c>h4{ left:14%; bottom:14%; width:52%;}
+section.page_c>img.p1{ left:18%; top:0%; width:60%;}
+
+section.end{ background: linear-gradient(to bottom, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); background: -webkit-linear-gradient(top, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%);}
+section.end img.logo{ position:absolute; left:50%; top:35%; width:80%; margin-left:-40%; opacity:0;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+
+<article class="container">
+    <div class="boxCont">
+        <section class="index">
+	    	<img src="images/index/logo.png" class="logo">
+	        <div class="slog">
+	        	<p class="img"><img src="images/index/slog.png"></p>
+	            <p class="txt">探索<span>panthère</span>系列的历史</p>
+	        </div>
+	        <img src="images/common/ar.png" class="ar" id="ar">
+	    </section>
+	    
+		<section class="page_a">
+	    	<img src="images/page_a/p1.png" class="p1">
+	        <img src="images/page_a/p2.png" class="p2">
+	        <img src="images/page_a/p3.png" class="p3">
+	    	<h3><img src="images/page_a/letter.png"></h3>
+	        <h4><img src="images/page_a/text.png"></h4>
+	    </section>
+	    
+	    <section class="page_b">
+	    	<img src="images/page_b/p2.png" class="p2">
+	        <img src="images/page_b/p1.png" class="p1">
+	    	<h3><img src="images/page_b/letter.png"></h3>
+	        <h4><img src="images/page_b/text.png"></h4>
+	    </section>
+	    
+	    <section class="page_c">
+	    	<img src="images/page_c/p1.png" class="p1">
+	    	<h3><img src="images/page_c/letter.png"></h3>
+	        <h4><img src="images/page_c/text.png"></h4>
+	    </section>
+	    
+	    <section class="end">
+	    	<img src="images/index/logo.png" class="logo">
+	    </section>
+    </div>
+</article>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.page.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	// 框架
+	var loadBox=$('#loadBox');
+	var containerBox=$('article.container');
+	var stageBox=containerBox.find('section');
+	console.log('stageBox:'+stageBox.length);
+	var stageNow=0;
+	
+	icom.screenTo169(false);
+	loadFunc();
+	
+	function loadFunc(){
+		//载入图
+		loadBox.show();
+		var loadPer=loadBox.children();
+		var loader = new PxLoader();
+		console.log('img:'+$('img').length);
+		var img=$('img');
+		img.each(function(i) {
+			if(i<=Math.floor(img.length*0.25)) loader.addImage($(this).attr('src'));
+            else return false;
+        });
+		
+		loader.addProgressListener(function(e) { 
+			//loadPer.html(Math.round(e.completedCount/e.totalCount*100)+'%'); 
+		}); 
+		
+		loader.addCompletionListener(function() {
+			if(window.console) console.log('load complete');
+			loader=null;
+			init();
+			setTimeout(function(){
+				icom.fadeOut(loadBox,500,function(){
+					$(this).remove();
+				});
+			},500);
+		});			
+		loader.start();	
+	}//end func	
+	
+	function init(){
+		stageNow=0;
+		containerBox.pageOn({onStart:motion_start,onComplete:motion_complete});
+		motion_add();
+		//测试
+		//containerBox.pageGoto(1,true);
+		$('.ar').on('touchmove',function(e){
+			e.stopImmediatePropagation();
+			console.log('touchmove');
+		})
+	}//end init
+	
+	function motion_start(id){
+		stageNow=id;
+		motion_add();
+	}//edn func
+	
+	function motion_complete(id){
+	}//edn func
+	
+	function motion_add(){
+		console.log('stageNow:'+stageNow);
+		var stage=stageBox.eq(stageNow);
+		switch(stageNow){
+			case 0:
+				stage.children('.slog').css({opacity:0,scale:0.8}).transition({opacity:1,scale:1,delay:0},3000,'in-out');
+				stage.children('img.sign').css({opacity:0}).transition({opacity:1,scale:1,delay:0},1000,'in-out');
+			break;
+			case 1:		
+				stage.children('img.p1').css({y:form_math(stage.children('img.p1'),0)}).transition({y:0,delay:0},1800,'in-out');
+				stage.children('img.p2').css({y:form_math(stage.children('img.p2'),0)}).transition({y:0,delay:1000},1500,'in-out');
+				stage.children('img.p3').css({opacity:1}).transition({opacity:0,delay:1200},'linear',1200);
+				stage.children('h3').css({x:form_math(stage.children('h3'),3)}).transition({x:0,delay:1500},1500,'in-out');
+				stage.children('h4').css({x:form_math(stage.children('h4'),1)}).transition({x:0,delay:2000},2000,'in-out');
+			break;
+			case 2:		
+				stage.children('img.p1').css({y:form_math(stage.children('img.p1'),2)}).transition({y:0,delay:1000},1500,'in-out');
+				stage.children('img.p2').css({opacity:0,scale:0.75}).transition({opacity:1,scale:1,delay:1500},3000,'in-out');
+				stage.children('h3').css({x:form_math(stage.children('h3'),1)}).transition({x:0,delay:2000},1500,'in-out');
+				stage.children('h4').css({x:form_math(stage.children('h4'),3)}).transition({x:0,delay:2500},1500,'in-out');
+		
+			break;
+			case 3:		
+				stage.children('img.p1').css({y:form_math(stage.children('img.p1'),0)}).transition({y:0,delay:1000},1500,'in-out');
+				stage.children('h3').css({x:form_math(stage.children('h3'),3)}).transition({x:0,delay:1500},1500,'in-out');
+				stage.children('h4').css({x:form_math(stage.children('h4'),1)}).transition({x:0,delay:2000},1500,'in-out');
+		
+			break;
+			case 4:
+				stage.children('img.logo').css({opacity:0,scale:0.4}).transition({opacity:1,scale:0.5,delay:1000},3000,'in-out');
+			break;
+		}//end switch
+	}//end func
+	
+	function form_math(obj,type){//滚动方向及距离计算
+		type=type||0;
+		var parent=obj.parent();
+		if(obj){
+			switch(type){
+				case 0://top
+					return -(obj.position().top+obj.outerHeight());
+					break;
+				case 1://right
+					return parent.outerWidth()-obj.position().left;
+					break;
+				case 2://bottom
+					return parent.outerHeight()-obj.position().top;
+					break;
+				case 3://left
+					return -(obj.position().left+obj.outerWidth());
+					break;
+			}//end switch
+		}//end if
+	}//end func
+	
+});
+</script>
+</body>
+</html>

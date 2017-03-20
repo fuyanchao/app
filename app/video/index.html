@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>视频播放</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+a.btn{ display:block; width:4.8rem; height:1.6rem; line-height:1.6rem; margin:.4rem auto; font-size: .24rem; background:#000; color:#fff; text-align:center;}
+.videoShell{ position: absolute; left: 0; top: 0; width: 100%; height: 100%;background-color: #000; z-index: 99; display: none;}
+.videoShell video{width: 100%; height: 100%;}
+
+.cover{ position: absolute; left: 0; top: 0; width: 50%; height: 50%; background-color: rgba(255,0,0,0.5); z-index: 99; display: none; pointer-events: none;}
+
+.video,.mod_player{
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+    width: 7rem;
+    height: 5rem;
+    overflow: hidden;
+    z-index: 1;
+    display: none;
+}
+
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+
+
+<a class="btn btnVideo" data-url='video/video.mp4' data-poster='video/video.jpg'>播放MP4视频</a>
+
+<a class="btn btnVideo" data-url='http://v.youku.com/v_show/id_XMTUzMjMyNDkwOA==.html?from=y1.3-idx-uhome-1519-20887.205908-205909-205916.4-3'>播放优酷视频</a>
+
+<a class="btn btnVideo" data-url='http://v.qq.com/cover/l/lg5rwca8u0gnpfx.html?vid=k0193v8jj6i'>播放腾讯视频</a>
+
+<a class="btn btnAdd" data-url='video/fullscreen.mp4' data-poster='video/fullscreen.jpg'>动态生成MP4视频</a>
+
+<a class="btn btnTvp">tvp播放器</a>
+
+<div class="videoShell"></div>
+
+<div class="cover"></div>
+
+<div id="mod_player1" class="mod_player"</div>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="../../iphone/js/base/video.js"></script>
+<script src="http://imgcache.qq.com/tencentvideo_v1/tvp/js/tvp.player_v2_jq.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	icom.screenTo169(false);
+	
+	var loadBox=$('aside.loadBox');
+	
+	/*ivideo 方法集说明
+	 * 
+	 * on(option):给视频按钮添加播放功能
+		 * 参数：
+		 * option.btn:视频播放按钮的jquery对象,默认值：$('a.btnVideo,#btnVideo')
+		 * option.autoplay:是否自动播放，默认值true
+		 * option.controls:是否显示控制界面，默认值true
+		 * option.playsinline:是否窗口内播放，默认值true
+		 * option.onEnded:mp4格式视频播放完毕后的回调函数
+		 * option.onClose:视频弹窗关闭后的回调函数
+		
+	 * data-vid：按钮标签上添加data-vid属性可指定视频地址或优酷id
+	 * data-type：按钮标签上添加data-type属性可指定视频类型是优酷、腾讯、mp4
+	 * data-poster:视频预览图地址
+	 * 
+	 * 
+	 * add(src,option):动态添加视频并播放，并返回动态生成的video标签的jquery对象
+	 * * 参数：
+		 * src:视频文件路径，必填项
+		 * option.autoplay:是否自动播放，默认值true
+		 * option.controls:是否显示控制界面，默认值false
+		 * option.poster:视频预览图地址
+		 * option.playsinline:是否窗口内播放，默认值true
+		 * option.onLoadstart：开始加载的回调函数，返回值为video对象自身
+		 * option.onLoaded：加载完毕的回调函数，返回值为video对象自身
+		 * option.onEnded：播放完毕的回调函数，返回值为video对象自身
+		 * option.onPlay：开始播放的回调函数，返回值为video对象自身
+		 * option.onPause：暂停播放的回调函数，返回值为video对象自身
+		 * option.onTimeupdate：播放过程中的回调函数，返回值为video对象自身
+	 */
+	
+	ivideo.on({autoplay:true,playsinline:true,onEnded:function(event){
+		$('#videoBox').remove();
+		icom.alert('mp4 play ended');
+	}});//给视频按钮添加播放功能
+	
+	$('a.btnAdd').on('touchend',function(e){
+		var src=$(this).data('url');
+		var poster=$(this).data('poster');
+		var shell=$('.videoShell').empty().show();
+		var vid=ivideo.add(src,{poster:poster,shell:shell,playsinline:true,onLoadstart:video_loadstart,onLoaded:video_loaded,onPlay:video_loaded,onEnded:video_eneded});
+	});
+	
+	function video_loadstart(event){
+		loadBox.show();
+	}//end func
+	
+	function video_loaded(event){
+		loadBox.hide();
+	}//end func
+	
+	function video_eneded(event){
+		var shell=$('.videoShell').empty().hide();
+	}//end func
+	
+	tvp_handler();
+	
+	function tvp_handler(){
+		
+		//正式路径
+		var basePath = '//wximg.qq.com/wxp/moment/NyQMDdRb-/';
+		
+		var videoId = ['y0020z9squa','e0020jf3la9','n00200tivff','j0020j6nvgs'];
+		var video1 = new tvp.VideoInfo();
+		video1.setVid(videoId[0]);
+		var player1 = new tvp.Player();
+		player1.create({
+        	//pic:basePath+'img/pic1.jpg',
+			video  : video1,
+		  	playerType: 'html5',
+		  	modId  : 'mod_player1'
+		});
+		
+		$('a.btnTvp').on('click',function(e){
+			console.log('btnTvp');
+			 $('#mod_player1').css('display','block');
+			  player1.play(video1);
+		});
+		
+	}//edn func
+	
+		
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>随风摇摆</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+article.game_result{ background-image:url(images/game/bg.jpg); }
+article.game_result .bar{ position:absolute; left:0; top:0; width:100%; height:.9rem; border-bottom:0.2em solid #dff1f9; background-image:url(images/game/panel_bg.png); background-size:100% 100%; text-align:right;}
+article.game_result .pendant{ position:absolute; left:0; top:.9rem; width:100%;}
+article.game_result .pendant img{ position:absolute; top:0; -webkit-transform-origin:center top; will-change:transform;}
+article.game_result .pendant img:nth-child(1){ left:4%; width:8%;}
+article.game_result .pendant img:nth-child(2){ left:13%; width:20%; top:-.1rem;}
+article.game_result .pendant img:nth-child(3){ left:29%; width:13%;}
+article.game_result .pendant img:nth-child(4){ left:63%; width:9%;}
+article.game_result .pendant img:nth-child(5){ left:77%; width:8%;}
+article.game_result .pendant img:nth-child(6){ left:90%; width:4%;}
+</style>
+</head>
+<body ontouchstart>
+<article class="game_result game_fail">
+  	<div class="pendant">
+        <img src="images/game/icon1.png">
+        <img src="images/game/icon2.png">
+        <img src="images/game/icon3.png">
+        <img src="images/game/icon7.png">
+        <img src="images/game/icon5.png">
+        <img src="images/game/icon6.png">
+    </div>
+    <div class="bar">
+    </div>
+</article>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.swing.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/*
+	 * swingOn():开启插件
+		 * 参数：
+		 * degree:最大角度，默认值30
+		 * speed:速度，默认值50
+		 * onOff:插件关闭的回调函数,传递引用插件的jquery对象
+	 * 
+	 * 
+	 * swingOff():关闭插件
+	 * 
+	 */
+
+	
+	$('.pendant img').swingOn();
+	
+});
+</script>
+</body>
+<!-- InstanceEnd --></html>

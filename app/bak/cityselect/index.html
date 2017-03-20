@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>省市区三级联动</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" type="text/css" href="../../iphone/css/common.css" />
+<style>
+input::-webkit-input-placeholder,input:focus::-webkit-input-placeholder{color:#fff;}/* input 标签placeholder文字的颜色*/
+.form { width: 5rem; margin: 1rem auto 0;}
+.form h3{ font-size: 0.3rem; margin-bottom: 0.4rem;}
+.form p{ margin-bottom: 0.2rem;}
+.form input{ font-size:.28rem; color:#fff; background:rgba(0,0,0,0.7); width:70%; padding:.1rem 0.2rem; width:4.6rem;}
+.form select{ font-size:.28rem; color:#fff; width:70%; padding:.1rem 0.2rem; width:1.6rem; background:url(images/address/ar.png) 95% center rgba(0,0,0,0.7) no-repeat; background-size:auto; float: left; margin-right: 0.1rem;}
+.form select.dist{margin-right: 0;}
+.form p.btn{ text-align: center; margin-top: 0.5rem;}
+.form p.btn a{ font-size:.28rem; color:#fff; text-align:center; background:rgba(0,0,0,0.7); padding:0.2rem 0.5rem; border-radius:0.1rem;}
+</style>
+</head>
+<body>
+<article>
+    <div class="form">
+    	<h3>请填写信息，我们将为您配送</h3>
+        <p><input name="name" type="text" placeholder="姓名"></p>
+        <p><input name="tel" type="tel" placeholder="手机联系方式" maxlength="11"></p>
+        <p class="city clearFix"> 
+            <select name="prov" class="prov"></select>  
+            <select name="city" class="city" disabled="disabled"></select> 
+            <select name="dist" class="dist" disabled="disabled"></select> 
+        </p> 
+        <p><input name="address" class="address" type="text" placeholder="收件地址"></p>
+        <p class="btn"><a class="btnSubmit">提交</a></p>
+    </div>
+</article>
+<script type="text/javascript" src="../../iphone/js/base/framwork.js"></script>
+<script type="text/javascript" src="../../iphone/js/form/citydata.js"></script>
+<script type="text/javascript" src="../../iphone/js/form/cityselect.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	var loadBox=$('aside.loadBox');
+	
+	//form
+	var inputName=$('input[name=name]');
+	var inputTel=$('input[name=tel]');
+	var inputProv=$('select[name=prov]');
+	var inputCity=$('select[name=city]');
+	var inputDist=$('select[name=dist]');
+	var inputAddress=$('input[name=address]');
+	var btnSubmit=$('a.btnSubmit');
+	
+	init();
+	
+	function init(){
+		$(".city").citySelect();
+		btnSubmit.on('touchend',btnSubmit_click);
+	}//end func
+	
+	function btnSubmit_click(e){
+		console.log(inputProv.children('option:selected').html());
+		if( inputName.val()=="") icom.alert('请填写姓名');
+		else if( !icom.checkStr(inputTel.val()) ) icom.alert('请正确填写手机号码');
+		else if( inputProv.children('option:selected').html()=="省份" ) icom.alert('请选择省份');
+		else if( inputCity.children('option:selected').html()=="城市" ) icom.alert('请选择城市');
+		else if( inputDist.children('option:selected').html()=="区县" ) icom.alert('请选择区县');
+		else if( inputAddress.val()=="") icom.alert('请填写地址');
+		else{
+			
+			 //模拟ajax过程
+			loadBox.show();
+			setTimeout(info_submitted,1000);
+			
+			//ajax代码写这里
+			
+		}//end else	
+	}//end func
+	
+	function info_submitted(){
+		loadBox.hide();
+	}//end func
+	
+	
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>自定义滚动条</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+aside.rule{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.8);}
+aside.rule>a.close{ position: absolute; right: 0.2rem; top: 0.2rem; width: 0.75rem; height: 0.75rem; border: 2px solid #fff; border-radius: 50%; color: #fff; font-size: 0.5rem; line-height: 0.75rem; text-align: center; background-color: #f00;}
+aside.rule>.con{ width: 5.5rem; background-color: #fff; border-radius: 0.1rem; margin: 0.5rem auto; padding: 0.5rem 0; position: relative;}
+aside.rule>.con h3{font-size: 0.5rem; line-height: 0.5rem; text-align: center;}
+aside.rule>.con .scr{position:relative; width:92%; height:6rem; overflow:hidden; margin:0.2rem auto 0; touch-action: pan-x pan-y;}
+aside.rule>.con .scr .panel{position:absolute; top:0; right:0; width:.1rem; height:100%;}
+aside.rule>.con .scr .panel i{ position:absolute; left:0; top:0; display:block; width:100%; background:#ff3838; opacity: 0.3; border-radius: 0.05rem;}
+aside.rule>.con .scr .cont{ position:absolute; left:0; top:0; width:96%; overflow:hidden;}
+aside.rule>.con .scr .cont h4{font-size:.26rem; font-weight: bold; color:#000; margin-top:.2rem;}
+aside.rule>.con .scr .cont p{font-size:.24rem; color:#000; line-height:.28rem; margin-top:.1rem;}
+</style>
+</head>
+<body>
+<article>
+	<aside class="rule">
+		<div class="con">
+	    	<h3>活动规则</h3>
+	    	<div class="scr">  
+	            <div class="cont">
+	            	<h4>活动时间：</h4>
+	            	<p>2015年1月12日0:00至2015年1月14日24:00</p>
+	                <h4>活动规则：</h4>
+	            	<p>活动期间内，通过参与统一老坛关爱年度加班汪H5游戏可获得滴滴打车券；每个手机用户只可领取一次。</p>
+	                <h4>活动奖励：</h4>
+	            	<p>成功参与此次活动的用户，在红包发放结束前均可获得滴滴打车券。此券可在用户使用滴滴打车软件并用手机支付时使用，不可用于其他类商品交易。礼券不可转让、不可返现。</p>
+	                <h4>奖品说明：</h4>
+	            	<p>100万份滴滴红包，总价值5000万元。</p>
+	            	<p>此活动最终解释权归统一老坛所有。如有问题请及时私信@酸爽宗师统一老坛官方微博。</p>
+	            	<h4>活动时间：</h4>
+	            	<p>2015年1月12日0:00至2015年1月14日24:00</p>
+	                <h4>活动规则：</h4>
+	            	<p>活动期间内，通过参与统一老坛关爱年度加班汪H5游戏可获得滴滴打车券；每个手机用户只可领取一次。</p>
+	                <h4>活动奖励：</h4>
+	            	<p>成功参与此次活动的用户，在红包发放结束前均可获得滴滴打车券。此券可在用户使用滴滴打车软件并用手机支付时使用，不可用于其他类商品交易。礼券不可转让、不可返现。</p>
+	                <h4>奖品说明：</h4>
+	            	<p>100万份滴滴红包，总价值5000万元。</p>
+	            	<p>此活动最终解释权归统一老坛所有。如有问题请及时私信@酸爽宗师统一老坛官方微博。</p>
+	            	<h4>活动时间：</h4>
+	            	<p>2015年1月12日0:00至2015年1月14日24:00</p>
+	                <h4>活动规则：</h4>
+	            	<p>活动期间内，通过参与统一老坛关爱年度加班汪H5游戏可获得滴滴打车券；每个手机用户只可领取一次。</p>
+	                <h4>活动奖励：</h4>
+	            	<p>成功参与此次活动的用户，在红包发放结束前均可获得滴滴打车券。此券可在用户使用滴滴打车软件并用手机支付时使用，不可用于其他类商品交易。礼券不可转让、不可返现。</p>
+	                <h4>奖品说明：</h4>
+	            	<p>100万份滴滴红包，总价值5000万元。</p>
+	            	<p>此活动最终解释权归统一老坛所有。如有问题请及时私信@酸爽宗师统一老坛官方微博。</p>
+	            </div>
+	            <div class="panel"><i></i></div>
+	        </div>
+	    </div>
+	    <a class="close">X</a>
+	</aside>
+	
+	<style>
+		p.btn{position: absolute; left: 0; bottom: 0.2rem; width: 100%; text-align: center;}
+		p.btn a{ padding: 0.15rem 0.2rem; background-color: #f00; color: #fff; margin: 0 0.1rem;}
+	</style>
+	<p class="btn">
+		<a class="btnTop">滚到顶部</a>
+		<a class="btnBottom">滚到底部</a>
+		<a class="btnUp">向上滚20</a>
+    	<a class="btnDown">向下滚20</a>
+	</p>
+   
+</article>
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.scrbar.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/*
+	 * scrbar(option):开启插件
+		 * 参数：
+		 * speed:滚动速度，默认值1
+		 * static：拉动条高度保持不变，默认是false,高度随着显示区域高度占全部内容高度的百分比动态改变
+		 * panelFade:模仿ios的滚动条渐隐效果，默认值false
+		 * onScroll:发生滚动的callback，返回参数1：滚动高度占总高度的百分比，范围0-1；返回参数2：滚动方向，向下为1，向上为-1；
+		 * onPause:暂停滚动
+		 * onResume:恢复滚动
+		 * onOff:插件关闭的回调函数,传递引用插件的jquery对象
+	 * 
+	 * scrbarOffset(pos)：滚动到指定位置
+		 * 参数：
+		 * pos：指定位置
+	 * 
+	 * 
+	 * scrbarOffset(offset)：滚动相对距离
+		 * 参数：
+		 * offset：相对距离值
+	 * 
+	 * scrbarTop():回到顶部
+	 * 
+	 * scrbarBottom():回到底部
+	 * 
+	 * scrbarOff()：关闭插件
+	 * 
+	 */
+	
+	var scrBox=$('.scr');
+	
+	scrBox.each(function(i,n){
+		$(n).scrbar({onScroll:scroll_handler});
+	});
+	
+	
+    
+    $('a.btnTop').on('touchend',function(e){
+		scrBox.scrbarTop(); 
+	});
+	
+    $('a.btnBottom').on('touchend',function(e){
+		scrBox.scrbarBottom(); 
+	});
+    
+	$('a.btnUp').on('touchend',function(e){
+		scrBox.scrbarOffset(-20); 
+	});
+	
+	$('a.btnDown').on('touchend',function(e){
+		scrBox.scrbarOffset(20); 
+	});
+	
+	function scroll_handler(percent,direct){
+		console.log('scrbar scroll percent:'+percent);
+		console.log('scrbar scroll direct:'+direct);
+	}//end func
+	
+});
+</script>
+</body>
+</html>

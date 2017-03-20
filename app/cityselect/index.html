@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>省市县三级联动</title>
+<meta charset="utf-8">
+<meta name="author" content="LOOP-BEATS">
+<meta name="description" content="Powered by LOOP-BEATS">
+<meta name="keywords" content="HTML5,WEIXIN,WECHAT,LOOP-BEATS">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no" />
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+article{background-image: url(images/award/bg.jpg); background-size: cover;}
+section{ position: relative;}
+section .top{ width: 100%; height: 3.9rem; background-image: url(images/award/top.png); position: relative;}
+section .top .ball{ position: absolute; top: 0; left: 0; width: 2.5rem; height: 35%;}
+section .top .logo{ position: absolute; left: 1.5rem; top:1.4rem; width: 1.7rem;}
+section h3{ text-align: center; font-size: 0.5rem; color: #00003a; font-size: 0.34rem; line-height: 0.4rem; margin-top: 0.4rem;}
+section table{ width: 6rem; margin: 0.4rem auto 0;}
+section table td{ padding: 0.1rem 0.15rem;}
+section table td.label{ width: 1.3rem; color: #00003a; font-size: 0.26rem; line-height: 0.45rem; text-align: right;}
+section table td.input input{ background-color: #00003a; color: #fff; font-size: 0.24rem; line-height: 0.45rem; height: 0.45rem; width: 3.6rem; padding: 0 0.1rem;}
+section table td.input p.city{}
+section table td.input p.city span{ background-color: #00003a; width: 1rem; height: 0.45rem; padding: 0 0.1rem; display: inline-block; float: left; position: relative; margin-right: 0.1rem;}
+section table td.input p.city span.dist{ margin-right: 0;}
+section table td.input p.city span i{ display: inline-block; width: 100%; color: #fff; font-size: 0.24rem; line-height: 0.45rem; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;}
+section table td.input p.city span select{ position: absolute; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; }
+section table td.input select.dist{ margin-right: 0;}
+section table td.input p{ margin-bottom: 0.2rem;}
+section p.btn{  margin-top: 0.4rem;}
+section p.btn a{ width: 3.2rem; margin-left: 1.9rem;}
+.keyboardSlideIn{ -webkit-transform: translateY(-3rem);}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+<article class="award">
+	<section>
+		<div class="top">
+			<img src="images/award/ball.png" class="ball" />
+			<img src="images/award/logo.png" class="logo" />
+		</div>
+		<h3>请填写信息，我们将为您配送</h3>
+		<table>
+			<tr>
+				<td class="label">
+					姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名
+				</td>
+				<td class="input">
+					<input name="name" type="text">
+				</td>
+			</tr>
+			<tr>
+				<td class="label">
+					手&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机
+				</td>
+				<td class="input">
+					<input name="tel" type="tel" maxlength="11">
+				</td>
+			</tr>
+			<tr>
+				<td class="label" valign="top">
+					收件地址
+				</td>
+				<td class="input">
+					<p class="city clearFix" id="citySelect">
+						<span class="prov"><i></i><select name="prov"></select></span>
+		                <span class="city"><i></i><select name="city" disabled="disabled"></select></span>
+		                <span class="dist"><i></i><select name="dist" disabled="disabled"></select></span>
+		            </p> 
+	        		<p><input name="address" class="address" type="text"></p>
+				</td>
+			</tr>
+		</table>
+		<p class="btn">
+			<a class="btnSubmit"><img src="images/award/btn_submit.png" /></a>
+		</p>
+	</section>
+</article>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="../../iphone/js/form/citydata.js"></script>
+<script src="../../iphone/js/form/cityselect.js"></script>
+<script>
+$(document).ready(function(){
+	
+	//-----------------------------------------定义和初始化变量----------------------------------------
+	var loadBox=$('aside.loadBox');
+
+	//form
+	var inputName=$('input[name=name]');
+	var inputTel=$('input[name=tel]');
+	var inputProv=$('span.prov i');
+	var inputCity=$('span.city i');
+	var inputDist=$('span.dist i');
+	var inputAddress=$('input[name=address]');
+	var btnSubmit=$('a.btnSubmit');
+	
+	
+	init_handler();
+	
+	//----------------------------------------页面逻辑代码----------------------------------------
+	function init_handler(){
+		console.log('init handler');
+		icom.keyboard($('input'),$('section'));
+		$("#citySelect").citySelect();
+		btnSubmit.on('touchend',btnSubmit_click);
+	}//end func
+	
+	function btnSubmit_click(e){
+		if( inputName.val()=="") icom.alert('请填写姓名');
+		else if( !icom.checkStr(inputTel.val()) ) icom.alert('请正确填写手机号码');
+		else if( inputProv.html()=="省份" ) icom.alert('请选择省份');
+		else if( inputCity.html()=="城市" ) icom.alert('请选择城市');
+		else if( inputDist.html()=="区县" ) icom.alert('请选择区县');
+		else if( inputAddress.val()=="") icom.alert('请填写地址');
+		else{
+		    var data = { name: inputName.val(), phone: inputTel.val(), province: inputProv.html(), city: inputCity.html(), district: inputDist.html(), address: inputAddress.val() };
+			icom.objectPrint(data);
+			 //模拟ajax
+			icom.fadeIn(loadBox,250);
+			//setTimeout(info_submitted,1000);
+			
+			loop.user.add(data, function (data) {
+			    icom.fadeOut(loadBox, 250);
+			    if (data.errcode == '0') {
+			        icom.alert('提交成功', function () {
+			            location.href = 'prdu.html';
+			        });
+			    }
+			    else {
+			        icom.alert(data.errmsg);
+			    }
+			})
+			
+		}//end else	
+	}//end func
+	
+	
+});//end ready
+
+</script>
+</html>

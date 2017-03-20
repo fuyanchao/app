@@ -1,0 +1,32 @@
+i.hand{ display: block; position: absolute; width: .5rem; height: .7rem; pointer-events: none; z-index: 9;}
+i.hand b{ display: block; width: 100%; height: 100%; background-image: url(../images/common/hand.png); -webkit-animation: hand 2s 0s ease infinite;}
+@-webkit-keyframes hand{
+	0%{-webkit-transform: scale(1.5); opacity: 1;}
+	30%{-webkit-transform: scale(1); opacity: 1;}
+	50%{-webkit-transform: scale(1); opacity: 1;}
+	70%{-webkit-transform: scale(1); opacity: 0;}
+	100%{-webkit-transform: scale(1); opacity: 0;}
+}
+
+article.timeline{ min-height: 100%; height: auto;}
+article.timeline header{ width: 100%; height: 5.2rem; background-image: url(../images/timeline/bg.jpg); position: relative; margin-bottom: 1.5rem;}
+article.timeline header .head{ position: absolute; right: .2rem; top: 4.3rem;}
+article.timeline header .head p.image{ margin-bottom: .1rem;}
+article.timeline header .head p.image img{ width: 1.4rem; border: 0.05rem solid #fff; box-shadow: 0 0 0.05rem #888;}
+article.timeline header .head p.slog{ font-size: .26rem; color: #888; text-align: right;}
+article.timeline header .nickname{ position: absolute; right: 2rem; bottom: .2rem; font-size: .3rem; font-weight: bold; color: #fff;}
+article.timeline section li{ margin-bottom: .5rem; width: 6.1rem; margin-left: .2rem;}
+article.timeline section li>.date{ float: left; width: 1.2rem;}
+article.timeline section li>.date span.day{ color: #000; font-size: .46rem; font-weight: bold;}
+article.timeline section li>.date span.month{ color: #000; font-size: .23rem; font-weight: bold;}
+article.timeline section li>a.cont{ float: right; width: 4.8rem;}
+article.timeline section li>a.picture img.pic{ float: left; width: 1.3rem;}
+article.timeline section li>a.picture p{ float: right; width: 3.2rem; margin-right: .2rem;}
+article.timeline section li>a.picture p span.word{ display: block; font-size: .26rem; color: #000;}
+article.timeline section li>a.picture p span.total{ display: block; font-size: .23rem; color: #888; margin-top: .4rem;}
+article.timeline section li>a.link{ background-color: #f3f3f5; width: 4.5rem; padding: .1rem .2rem .1rem .1rem;}
+article.timeline section li>a.link h4{ display: block; font-size: .26rem; color: #000; margin-bottom: .15rem;}
+article.timeline section li>a.link img.pic{ float: left; width: .7rem;}
+article.timeline section li>a.link span.word{ float: right; width: 3.6rem; font-size: .22rem; color: #000;}
+
+

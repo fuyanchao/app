@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>微信用户身份验证</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+p{ margin: .4rem .4rem;}
+span.label{ font-size: .28rem; margin-right: .2rem;}
+span.name{font-size: .36rem;}
+img.head{ width: 1rem; height: 1rem; border: 1px solid #000;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+
+<p>
+	<span class="label">用户头像：</span>
+	<img class="head" />
+</p>
+
+<p>
+	<span class="label">用户昵称：</span>
+	<span class="name"></span>
+</p>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="../../iphone/js/base/monitor.js"></script>
+<script src="../../iphone/js/base/share.js"></script>
+<script src="http://bamboo.api.be-xx.com/js/loop_api.js"></script>
+<script src="../../iphone/js/base/user.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	//----------------------------------------微信用户身份验证----------------------------------------
+	iuser.init(userGetted);//获得用户微信身份验证
+	
+	function userGetted(data){
+		console.log('微信用户头像：'+data.headimage);
+		console.log('微信用户昵称：'+data.nickname);
+		$('img.head').attr({src:data.headimage});
+		$('span.name').html(data.nickname);
+	}//end func
+	
+});
+</script>
+</body>
+</html>

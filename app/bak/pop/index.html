@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>弹窗</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+.pop{ position: relative; width: 80%; height: 6rem; background: #808080; display: none;}
+.pop a.close{ position: absolute; right: .2rem; top: .2rem; width:.4rem; height: .4rem; background: #000; font-size: .32rem; line-height: .4rem; text-align: center; color: #fff;}	
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+<aside class="pop">
+	<a class="close">X</a>
+</aside>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.pop.js"></script>
+<script>
+	
+	/*
+	 * popOn(option):开启插件
+	 	* 参数：
+	 	* y:弹窗的top值，默认值-1，自动居中
+	 	* fade：打开关闭的淡入淡出效果时间，默认值250
+	 	* wrap：是否包裹‘popBox’遮罩层，默认值true
+	 	* closeEvent：关闭事件，默认'touchend'
+	 	* closeType：关闭方式，默认'button'
+	 	* onOpen：打开后的callback
+	 	* onClose：关闭后的callback
+	 	* 
+	 * 
+	 * popOff()：关闭插件
+	 */
+	
+	$('.pop').popOn({onOpen:popOpen,onClose:popClose});
+	
+	function popOpen(){
+		console.log('pop open');
+	}//end func
+	
+	function popClose(){
+		console.log('pop close');
+	}//end func
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>上传图片 涂鸦~~~~</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" type="text/css" href="css/iphone.css" />
+<style>
+	body{background: #ccc;text-align: center; }
+	a{color: #000;}
+	#fileBox{display: none;}
+	#canvas{width: 90%; height: 45%; margin: 2rem auto; background: #fff;}
+	#cameraTool{padding-bottom: 1rem;}
+	#cameraTool a{font-size: 1.4rem; display: inline-block;margin: 0 1rem;background: #00FFFF; padding: 0.5rem 1rem;}
+	#colorTool{padding-bottom: 1rem;}
+	#colorTool a{display: inline-block;width: 2rem;height: 2rem; border: 1px solid #fff; margin: 0 1rem; }
+	#colorTool a.c1{background-color: #f00;}
+	#colorTool a.c2{background-color: #ff0;}
+	#colorTool a.c3{background-color: #0f0;}
+	#colorTool a.c4{background-color: #0ff;}
+	#colorTool a.c5{background-color: #00f;}
+	#colorTool a.c6{background-color: #000;}
+	
+	
+	#sizeTool{padding-bottom: 1rem;}
+	#sizeTool a{display: inline-block;width: 2rem;height: 2rem; border: 1px solid #fff; background: #ccc; line-height: 2rem; }
+	
+	#actionTool{}
+	#actionTool a{display: inline-block; border: 1px solid #fff; border-radius: 1px;padding: 0.5rem 1rem;}
+	
+	.sketchTool{display: none;}
+	
+	.btnStart{padding-top: 3rem;}
+	
+	#imgShow{position:fixed; left:0; top:0; width:100%; height:100%; text-align:center; background:rgba(0,0,0,0.85); z-index:997; display:none;}
+	#imgShow img{ margin: 0 auto; margin-top: 8rem;}
+</style>
+</head>
+<body>
+<aside class="loadBox" id="loadBox"><span><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><b></b></aside>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+
+<div id="canvas"></div>
+<div id="cameraTool">
+	<a href="#drawBoard" data-cameraPic  = "true">上传照片</a>
+	<a href="#drawBoard" data-cameraLarger  = "true">放大</a>
+	<a href="#drawBoard" data-cameraSmall  = "true">缩小</a>
+	<div class="btnStart"><a href="#">开始DIY</a></div>
+</div>
+<div id="colorTool" class="sketchTool">
+	<a href="#drawBoard" class="c1" data-sketchColor = "#f00"></a>
+	<a href="#drawBoard" class="c2" data-sketchColor = "#ff0"></a>
+	<a href="#drawBoard" class="c3" data-sketchColor = "#0f0"></a>
+	<a href="#drawBoard" class="c4" data-sketchColor = "#0ff"></a>
+	<a href="#drawBoard" class="c5" data-sketchColor = "#00f"></a>
+	<a href="#drawBoard" class="c6" data-sketchColor = "#000"></a>
+</div>
+<div id="sizeTool" class="sketchTool">
+	<a href="#drawBoard" class="c1" data-sketchSize = "3">3</a>
+	<a href="#drawBoard" class="c2" data-sketchSize = "5">5</a>
+	<a href="#drawBoard" class="c3" data-sketchSize = "10">10</a>
+</div>
+<div id="actionTool" class="sketchTool">
+	<a href="#drawBoard" data-sketchClear = "true">重新画</a>
+	<a href="#drawBoard" data-sketchCancel = "true">上一步</a>
+	<a href="#drawBoard" data-sketchDownLoad = "true">生成图片</a>
+</div>
+<div id="imgShow"></div>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script type="text/javascript" src="../../iphone/js/base/framwork.js"></script>
+<script type="text/javascript" src="../../iphone/js/canvas/jcanvas.js" ></script>
+<script type="text/javascript" src="js/drawBoard.js" ></script>
+</body>
+<script>
+$(function(){
+	var box = $("#canvas");
+	var w = box.width();
+	var h = box.height();
+	
+	var isUploadPic = false;
+	var cameraTool = $("#cameraTool");
+	var sketchTool = $(".sketchTool");
+	var drawBoard;
+	var btnDiy = $(".btnStart a");
+	var imgShow = $("#imgShow")
+	btnDiy.on('touchend',function(e){
+		if(!isUploadPic)
+		{
+			alertFunc("你还没有上传图片哦~");
+			return;
+		}
+		openSketch();
+	});
+	
+	//上面代码都是废话
+	//添加画板 可以自己写也可以用js的方式添加
+	$("#canvas").html("<canvas id='drawBoard' width='"+w+"' height='"+h+"'></canvas>");
+	drawBoard = $('#drawBoard');
+	
+	drawBoard.DrawBoardOn({
+		stageWidth:w,
+		stageHeight:h,
+		picUploaded:picUploaded,
+		picDownload:picDownload
+	});
+	
+	function openSketch(){
+		cameraTool.hide();
+		sketchTool.show();
+		drawBoard.DrawBoardUnLock();
+	}
+	
+	function picUploaded(){
+		isUploadPic = true;
+	}
+	function picDownload(value){
+		imgShow.html("<img src='"+value+"'/>");
+		imgShow.show().one("click",function(e){
+			imgShow.hide();
+		})
+	}
+	//
+});
+
+</script>
+</html>

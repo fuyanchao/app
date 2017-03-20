@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>时间选择器</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+body{ color: #fff; background-image:url(images/common/bg.jpg);}
+
+article.info{}
+article.info h3{ display:block; width:80%; margin:1.4rem auto .5rem; border-bottom:1px solid rgba(255,255,255,0.6); padding-bottom:.3rem; text-align:center;}
+article.info h3 span{ font-size:.3rem; line-height:.3rem;}
+article.info .form{ width:80%; margin:0 auto;}
+article.info .form td.label{ width:30%;}
+article.info .form td{ padding:.25rem 0;}
+article.info .form td span{font-size:.28rem;}
+article.info .form td a{ width:80%; padding:0 10%; height:.6rem; line-height:.6rem; font-size:.3rem; color:#fff; background-image:url(images/info/input.png); background-size:100% 100%;}
+article.info .form td input{ -webkit-appearance:none; border-radius:0; width:80%; padding:0 10%; height:.6rem; line-height:.6rem; font-size:.3rem; color:#fff; background-color:transparent; background-image:url(images/info/input.png); background-size:100% 100%;}
+article.info .form td select{ -webkit-appearance:none; border-radius:0; width:100%; padding:0 10%; height:.52rem; line-height:.52rem; font-size:.28rem;color:#fff; background-color:transparent; background-image:url(images/info/select.png); background-size:100% 100%;}
+article.info p.btn{ display:block; width:80%; margin:.5rem auto 0; padding-top:.4rem; border-top:1px solid rgba(255,255,255,0.6); text-align:center;}
+article.info p.btn a{ height:.52rem; line-height:.52rem; font-size:.28rem; padding:0 .4rem; border:1px solid rgba(255,255,255,0.6); text-align:center;}
+
+.keyboardSlideIn{ -webkit-transform: translateY(-2rem);}
+
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+
+<article class="info">
+	<section>
+		<h3><span>预约全国浪琴表九大直营店尊享服务<br>领取到店好礼</span></h3>
+	    <table class="form">
+	      <tr>
+	        <td class="label"><span>选择店铺：</span></td>
+	        <td>
+	            <select name="shop">
+	            	<option></option>
+	                <option>梅龙镇分店</option>
+	                <option>港汇分店</option>
+	                <option>中兴泰富分店</option>
+	                <option>恒隆广场分店</option>
+	                <option>正大广场分店</option>
+	            </select>
+	        </td>
+	      </tr>
+	      <tr>
+	        <td class="label"><span>到店时间：</span></td>
+	        <td><a class="date"></a></td>
+	      </tr>
+	      <tr>
+	        <td class="label"><span>你的姓名：</span></td>
+	        <td><input name="name" type="text" maxlength="20"></td>
+	      </tr>
+	      <tr>
+	        <td class="label"><span>你的手机：</span></td>
+	        <td><input name="tel" type="tel" maxlength="11"></td>
+	      </tr>
+	    </table>
+	    <p class="btn"><a id="btnSumbit">提&nbsp;&nbsp;&nbsp;&nbsp;交</a></p>
+	</section>
+</article>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<link href="js/form/date/css/mobiscroll.scroller.css" rel="stylesheet"/>
+<link href="js/form/date/css/mobiscroll.scroller.ios7.css" rel="stylesheet"/>
+<script src="js/form/date/js/mobiscroll.core.js"></script>
+<script src="js/form/date/js/mobiscroll.scroller.js"></script>
+<script src="js/form/date/js/mobiscroll.datetime.js"></script>
+<script src="js/form/date/js/i18n/mobiscroll.i18n.zh.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	var infoBox=$('article.info');
+	
+	var inputDate=$('a.date');
+	var inputShop=$('select[name=shop]');
+	var inputName=$('input[name=name]');
+	var inputTel=$('input[name=tel]');
+	var btnSumbit=$('#btnSumbit');
+	
+	init();
+	
+	function init(){
+		icom.keyboard($('input'),$('section'));
+		$('#btnSumbit').on('touchend',function(e){
+			if( inputShop.val()=="") icom.alert('请选择店铺');
+			else if( inputDate.html()=="") icom.alert('请选择到店时间');
+			else if( inputName.val()=="") icom.alert('请正确填写姓名');
+			else if( !icom.checkStr(inputTel.val()) ) icom.alert('请正确填写手机号码');
+			else{
+				
+				 //模拟ajax过程
+				loadBox.show();
+				setTimeout(function(){
+					//info_submitted();
+				},1000);
+				
+				//ajax代码写这里
+				/*
+				$.ajax({
+					type:"GET",
+					url:"http://net.buzzreader.cn:8088/pizzahut_tea/addData.php",
+					data:infoData,
+					dataType:"text",
+					success:function(data){
+						info_submitted();
+					},
+					error:function (XMLHttpRequest, textStatus, errorThrown){
+						loadBox.hide();
+						icom.alert('用户信息发送失败！');
+					}
+				});
+				*/
+				
+			}//end else			
+		});
+		
+
+		/*
+		日历控件参数说明
+		startYear:开始年份
+		endYear：结束年份
+		defaultValue：默认日期（默认是系统当前日期）
+		minDate：最小日期
+		maxDate：最大日期
+		*/
+
+		$.mobiscroll.themes.ios7 = {
+			dateOrder: 'yyMMdd',
+			rows: 5,
+			height: 34,
+			minWidth: 55,
+			headerText: false,
+			showLabel: true,
+			btnWidth: false,
+			useShortLabels: true
+		};
+		
+		inputDate.mobiscroll().date({
+			theme: 'ios7',
+			lang: 'zh',
+			display: 'bottom',
+			mode: 'scroller',
+			dateOrder:'yy MM dd',
+			startYear:2015,
+			endYear:2015,
+			defaultValue: new Date(2015,0,26),
+			minDate: new Date(2015,0,26),
+			maxDate: new Date(2015,1,28),
+			onSelect: function (valueText, inst) {
+				inputDate.val(valueText);
+				var date=valueText.split('/');
+				inputDate.html(date[2]+'年'+date[1]+'月'+date[0]+'日');
+			}//end func
+		});
+		
+//		alert('android:'+os.android);
+//		var inputTest=$('input.test');
+//		if(os.android) inputTest.one('focusin',input_focusin);
+//		
+//		function input_focusin(e){
+//			$(this).one('focusout',input_focusout);
+//			$('article').css({y:-2+'rem'});
+//		}//end func
+//		
+//		function input_focusout(e){
+//			$(this).one('focusin',input_focusin);
+//			$('article').css({y:0});
+//		}//end func
+
+//		setTimeout(function(){
+//			iOrient.lock('landscape');
+//		},2000);
+		
+		
+	}//end func
+		
+		
+	
+});
+</script>
+</body>
+</html>

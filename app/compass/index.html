@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>电子罗盘</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+article.index{}
+article.index .bg{ position: absolute; left: -6%; top: -6%; width: 112%; height: 112%; background-image: url(images/index/bg.jpg);}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<article class="index">
+	<div class="bg"></div>
+</article>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script>
+$(document).ready(function(e) {
+    
+	//compass
+	var compassPanel=$('<div id="compassPanel"><h3>电子罗盘</h3><p>alpha：<span class="alpha"></span></p><p>beta：<span class="beta"></span></p><p>gamma：<span class="gamma"></span></p><p>指北针：<span class="heading"></span></p>').appendTo($('body'));
+	var compassAlpha=compassPanel.find('.alpha');
+	var compassBeta=compassPanel.find('.beta');
+	var compassGamma=compassPanel.find('.gamma');
+	var compassHeading=compassPanel.find('.heading');
+	
+	var angXMax=45,angXOrg,angXLast,angYLast,angRange=0.06;
+	
+	var bgBox=$('.bg');
+	
+	init();
+	
+	function init(){
+		compassPanel.show();
+		$(window).on('deviceorientation',deviceorientationHandler);
+	}//end func	
+	
+	function deviceorientationHandler(e){
+		compassAlpha.html(Number(e.originalEvent.alpha).toFixed(2));//屏幕朝上水平向前拿手机,手机水平方向改变指向角度，范围0-360,相当于指南针
+		compassBeta.html(Number(e.originalEvent.beta).toFixed(2));//屏幕朝上水平向前拿手机,手机沿x轴自旋，范围-90-90,竖直向上为90度，水平为0度，竖直向下为-90度
+		compassGamma.html(Number(e.originalEvent.gamma).toFixed(2));//屏幕朝上水平向前拿手机,手机沿y轴自旋，范围-90-90,自旋到屏幕朝下后数值会扩展到90至180或-90至-180
+		compassHeading.html(Number(e.originalEvent.webkitCompassHeading).toFixed(2));//指北针，范围0-360,安卓大部分机型无此感应器
+		
+		//横向移动
+		if(!angXOrg){
+			if(os.ios){
+				angXOrg=angXLast=Number(Number(e.originalEvent.alpha).toFixed(1));
+				angYLast=Number(Number(e.originalEvent.beta).toFixed(1));
+			}//end func
+			else{
+				angXOrg=angXLast=Math.round(e.originalEvent.alpha);
+				angYLast=Math.round(e.originalEvent.beta);
+			}//end else
+		}//end if
+		else{
+			if(os.ios){
+				var angX=Number(Number(e.originalEvent.alpha).toFixed(1));
+				var angY=Number(Number(e.originalEvent.beta).toFixed(1));
+			}//end if
+			else{
+				if(Math.abs(e.originalEvent.alpha-angXLast)>8) var angX=Math.round(e.originalEvent.alpha);
+				else var angX=angXLast;
+				if(Math.abs(e.originalEvent.beta-angYLast)>8) var angY=Math.round(e.originalEvent.beta);
+				else var angY=angYLast;
+			}//end else
+			if(angX!=angXLast || angY!=angYLast){
+				//横向运动
+				angX=angX<angXOrg?360-angXOrg+angX:angX-angXOrg;//获得相对于角度初始值的当前角度值（0-360）
+				if(angX<=10 && angXLast>=350) dir=1; //顺时针进入下个360度
+				else if(angX>=350 && angXLast<=10) dir=-1; //逆时针进入下个360度
+				else dir=angX>=angXLast?1:-1;
+				angXLast=angX;
+				//angX+=dir*1;
+				angX=angX>180?angX-360:angX;
+				if(angX<-angXMax){
+					angX=-angXMax;
+					angXOrg=e.originalEvent.alpha+angXMax;
+				}//end if
+				else if(angX>angXMax){
+					angX=angXMax;
+					angXOrg=e.originalEvent.alpha-angXMax;
+				}//end if
+				
+				//纵向运动
+				angY=angY<0?0:angY;
+				angYLast=angY;
+				
+				var x=angX/angXMax*$(window).width()*angRange;	
+				var y=(angY-45)/45*$(window).height()*angRange;
+				bgBox.css({x:x,y:y});
+			}//end if
+		}//end else
+	}//end func
+	
+	
+});
+</script>
+</body>
+</html>

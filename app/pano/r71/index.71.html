@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>全景</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+.pano{width:100%; height:100%; position:relative; overflow:hidden;}
+.pano>.scene{position:absolute; left:0; top:0; width:100%; height:100%;}
+.pano>.scene div{will-change:transform;}
+.pano>.hot{ position:absolute; left:0; top:0; width:100%; height:100%;}
+.pano>.hot *{will-change:transform;}
+.pano>.hot span{ display:block; position:absolute; left:0; top:0; width:.4rem; height:.4rem; margin-left: -.2rem; margin-top: -.2rem; background:rgba(255,255,255,0.8); border-radius:50%; box-shadow:0 0 .1rem #333;}
+.pano>.hot span i{ position:absolute; left:-1px; top:-1px; width:100%; height:100%; border-radius:50%; border:1px solid #fff; -webkit-animation:hot 2s ease infinite; }
+
+a.btnClose{position: absolute; left: 0; top: 0; padding: .2rem .2rem; background-color: #000; color: #fff; text-align: center; font-size: .24rem; box-shadow: 0 0 0.1rem #000; z-index: 999;}
+
+@-webkit-keyframes hot{
+	0%{ opacity:1; -webkit-transform:scale(1);}
+	100%{opacity:0; -webkit-transform:scale(2);}
+}
+
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<div class="pano" id="panoBox">
+	<div class="scene"></div>
+	<div class="hot"></div>
+</div>
+<a class="btnClose" >关闭全景</a>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="r71/three.min.js"></script>
+<script src="r71/CSS3DRenderer.js"></script>
+<script src="r71/iphone.pano.js"></script>
+<script>
+
+$(document).ready(function(e) {
+	
+	icom.screenScrollUnable();
+	
+	/*
+	* panoOn（option）:开启插件
+		* 参数：
+		* hot:热点数组
+		* image：全景6面图文件路径数组
+		* compass:是否打开电子罗盘操控（目前只有苹果支持安卓不支持），默认值：false
+		* onTouchhot:点击热点的回调函数,传递被点击热点的jquery对象
+		* onTouchstart:3D全景的touchstart的回调函数,传递全部热点的jquery对象
+		* onTouchmove:3D全景的touchmove的回调函数,传递全部热点的jquery对象
+		* onTouchend:3D全景的touchend的回调函数,传递全部热点的jquery对象
+		* onOff:插件关闭的回调函数,传递引用插件的jquery对象
+	* 
+	* panoOff（）：关闭插件
+    */
+	
+	//pano
+	var panoBox=$('#panoBox');
+	var hotList=[{pan:-2,tilt:-17,label:'中控仪表台'},{pan:-2,tilt:10,label:'后视镜'},{pan:204,tilt:-166,label:'驾驶方向盘'},{pan:-203,tilt:200,label:'副驾驶储物柜'},{pan:-293,tilt:202,label:'后门'},{pan:2,tilt:146,label:'后顶灯'},{pan:2,tilt:190,label:'后排座椅'}];
+	var imageList=['images/pano/0.jpg','images/pano/1.jpg','images/pano/2.jpg','images/pano/3.jpg','images/pano/4.jpg','images/pano/5.jpg'];
+
+	init();
+	
+	function init(){
+		panoBox.panoOn({hot:hotList,image:imageList,distance:30,compass:true,onTouchhot:onTouchhot_handler,onTouchend:onTouchend_handler,onOff:pano_off});
+		$('a.btnClose').one('touchend',function(e){
+			panoBox.panoOff();
+			$(this).remove();
+		});
+	}//end func
+	
+	function pano_off(_this){
+		_this.remove();
+	}//end func
+	
+	function onTouchhot_handler(hot){//ele是对象object
+		var id=hot.index();
+		console.log('hit hot id:'+id);
+		console.log('hit hot label:'+hotList[id].label);
+		panoBox.panoPause();
+		icom.alert(hotList[id].label,function(){
+			panoBox.panoResume();
+		});
+	}//end func
+	
+	function onTouchend_handler(hots){
+		var hotIn=[];
+		var hotOut=[];
+		hots.each(function(i){
+			var x=$(this).offset().left,y=$(this).offset().top;
+			if(x>0 && x<$(window).width() && y>0 && y<$(window).height()) hotIn.push($(this));
+			else hotOut.push($(this));
+		});
+		hotIn.forEach(function (n) {
+			console.log('hot in screen:'+n.index());
+		});
+		hotOut.forEach(function (n) {
+			console.log('hot out screen:'+n.index());
+		});
+	}//end func
+
+	
+});
+	
+</script>
+</body>
+</html>

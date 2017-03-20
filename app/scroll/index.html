@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>横向循环滚动</title>
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+article.templet{ background-image:url(images/common/bg.jpg);}
+
+.scr{ width:100%; height:1.04rem; padding:.2rem 0; margin: 2rem auto; background:rgba(0,0,0,0.3); position:relative; touch-action: pan-x pan-y;}
+.scr a.boxBtnL{ position:absolute; left:.1rem; top:50%; width:.24rem; height:.68rem; margin-top: -.34rem; background-image:url(images/camera/ar_l.png); background-size:100% 100%; }
+.scr a.boxBtnR{ position:absolute; right:.1rem; top:50%; width:.24rem; height:.68rem; margin-top: -.34rem; background-image:url(images/camera/ar_r.png); background-size:100% 100%; }
+.scr .boxMask{ width:5.6rem; height:100%; margin:0 auto; position:relative; overflow:hidden;}
+.scr .boxMask ul{will-change:transform;}
+.scr .boxMask ul li{ float:left; margin:.1rem; width:1.2rem; height:100%;}
+.scr .boxMask ul li.active{ box-shadow:0 0 .2rem #fffca8;}
+.scr .boxMask ul li img{ width:100%;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<article class="templet">
+    <div class="scr">
+    	<div class="boxMask">
+        	<ul class="boxCont">
+          		<li><img src="images/camera/thumb1.jpg"></li>
+                <li><img src="images/camera/thumb2.jpg"></li>
+                <li><img src="images/camera/thumb3.jpg"></li>
+                <li><img src="images/camera/thumb4.jpg"></li>
+                <li><img src="images/camera/thumb5.jpg"></li>
+        	</ul>
+      	</div>
+      	<a class="boxBtnL"></a>
+      	<a class="boxBtnR"></a>
+    </div>
+</article>
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.scr.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/*
+	 * scr(option):开启插件
+		 * 参数：
+		 * speed:滚动速度,默认值500
+		 * dir:滚动方向，默认1
+	 * 
+	 * scrPrev()：向前滚动
+	 * 
+	 * scrNext()：向后滚动
+	 * 
+	 * scrStop()：停止滚动
+	 * 
+	 * scrPlay()：继续滚动
+	 * 
+	 * scrSpeed(speed)：设置滚动速度
+	 * 
+	 * scrDir(dir)：设置滚动方向，向前：1，向后：-1
+	 * 
+	 * scrOff()：关闭插件
+	 */
+		
+	var scrBox=$('.scr');
+	
+	scrBox.scr(); 
+	
+//	setTimeout(function(){
+//		scrBox.scrSpeed(1000);
+//	},1500)
+//	
+//	setTimeout(function(){
+//		scrBox.scrDir(-1);
+//	},3000)
+	
+//	setTimeout(function(){
+//		scrBox.scrStop();
+//	},4500)
+//	
+//	setTimeout(function(){
+//		scrBox.scrPlay();
+//	},6000)
+	
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>垂直方向循环滚动</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+h3{text-align:center; font-size:.5rem; margin-bottom:.1rem; padding-top:.3rem;}
+
+.focusCV{position:relative;width:100%; height:60%; margin-top:20%; touch-action: pan-x pan-y;}
+.focusCV a.boxList { display:block; position:absolute; left:0; bottom:0; width:100%; text-align:center;}
+.focusCV a.boxList span{ display:inline-block; width:.2rem; height:.2rem; margin:0 .1rem; background-color:#888; border:0.02rem solid #000; border-radius:50%;}
+.focusCV a.boxList span.active{background-color:#fc0; }
+.focusCV a.boxPrev{position:absolute; left:50%; top:-10%; width:.72rem; margin-left:-.36rem; height:.4rem; background-image:url(images/common/ar3.png); background-size:100% 100%;}
+.focusCV a.boxNext{position:absolute; left:50%; bottom:-10%; width:.72rem; margin-left:-.36rem; height:.4rem; background-image:url(images/common/ar4.png); background-size:100% 100%;}
+.focusCV .boxMask{width:100%; height:100%; overflow:hidden; position:relative;}
+.focusCV .boxMask ul{ position:absolute; width: 100%; height: 100%; }
+.focusCV .boxMask ul.moving{will-change:transform;}
+.focusCV .boxMask ul li{ display:block; width: 100%; height: 100%; text-align:center;}
+.focusCV .boxMask ul li img{ height:50%; margin-top: 20%;}
+
+</style>
+</head>
+<body>
+<article>
+	<h3>垂直方向循环滚动</h3>
+    <div class="focusCV">
+        <div class="boxMask">
+            <ul>
+                <li><img src="images/select/scene1.png"></li>
+                <li><img src="images/select/scene2.png"></li>
+                <li><img src="images/select/scene3.png"></li>
+                <li><img src="images/select/opt1.png"></li>
+                <li><img src="images/select/opt2.png"></li>
+                <li><img src="images/select/opt3.png"></li>
+                <li><img src="images/select/opt4.png"></li>
+                <li><img src="images/select/opt5.png"></li>
+            </ul>
+        </div>
+        <a class="boxList"></a>
+        <a class="boxPrev"></a>
+        <a class="boxNext"></a>
+    </div>  	
+</article>
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.focusCV.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/*
+	 * focusCV(option):开启插件
+		 * 参数：
+		 * onStart:滚动开始的callbask，会返回当前所处第几个单元的数值
+		 * onComplete:滚动开始的callbask，会返回当前所处第几个单元的数值
+		 * swipe：是否开启滑动滚动，默认值true
+		 * auto:是否开启自动滚动，默认值false
+		 * speed:滚动速度,默认值1000
+		 * delay:滚动间隔,默认值5000
+		 * onStart:开始移动的回调函数,传递当前显示对象的id
+		 * onComplete:结束移动的回调函数,传递当前显示对象的id
+		 * onOff:插件关闭的回调函数,传递引用插件的jquery对象
+	 * 
+	 * focusCVGoto(id):跳转到指定单元
+		 * 参数：
+		 * id:跳转去的指定单元的序列号
+	 * 
+	 * focusCVPrev()：向前一个单元
+	 * 
+	 * focusCVNext()：向后一个单元
+	 * 
+	 * focusCVStop()：停止自动滚动
+	 * 
+	 * focusCVPlay()：继续自动滚动
+	 * 
+	 * focusCVOff()：关闭插件
+	 */
+	
+	$('.focusCV').focusCV({onStart:focusGet,onComplete:focusGet});
+	
+	function focusGet(id){
+		console.log('now:'+id)
+	}//end fund
+	
+});	
+</script>
+</body>
+</html>

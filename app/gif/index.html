@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>连续帧模拟gif</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+#btnGif{display:block; margin:.4rem auto; width:2.48rem;}
+#btnSprite{display:block; margin:.4rem auto; width:248px; height:60px; background-size:cover;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+
+<img id="btnGif">
+<a id="btnSprite"></a>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.gif.js"></script>
+<script>
+	/*
+	 * gifOn（path,num,option）:开启插件
+		 * 参数：
+		 * path:图片路径+名称,必填项
+		 * num:有几张连续png图,必填项
+		 * option.type:图片类型，默认png
+		 * option.repeat:重复次数，默认值-1（无限循环）
+		 * option.speed:每帧之间的间隔，默认100ms
+		 * option.onLoaded:png全部加载完后触发
+		 * option.onComplete：连续帧播放到最后一张时触发
+		 * option.onOff:插件关闭的回调函数,传递引用插件的jquery对象
+	 * 
+	 * gifSpeed（speed）：修改每帧之间的间隔
+	 * 
+	 * gifPause（）：暂停播放
+	 * 
+	 * gifResume（）:恢复播放
+	 * 
+	 * gifGoto(id):跳转到指定帧
+		 * 参数：
+		 * id：跳转去的帧的序列号
+	 * 
+	 * gifOff（）：关闭插件
+	 * 
+	 */
+	
+	var btnGif=$('#btnGif');
+	var btnSprite=$('#btnSprite');
+	
+	btnGif.gifOn('images/gif/btn',8);
+	btnSprite.gifOn('images/gif/btns.png',8,{sprite:true});
+	
+//	setTimeout(function(){
+//		btnGif.gifPause();
+//	},1000);
+	
+	setTimeout(function(){
+		btnGif.gifSpeed(50);
+	},2000);
+	
+</script>
+</body>
+</html>

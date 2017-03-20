@@ -1,0 +1,110 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>瀑布流</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" type="text/css" href="../../iphone/css/common.css" />
+<style>
+body{ background:#f7f7f7; color:#747474;}
+article{ overflow: auto; height: auto;}
+.content{ width:100%;}
+.content ul{ position:relative;}
+.content li.view{ width:1.5rem; border:1px solid #fff; padding:0.04rem; background:#fff; box-shadow:0.02rem 0.02rem 0.02rem #ddd; position: absolute; left: 0; top: 0; visibility: hidden;} 
+.content li.view p.pic{ margin-bottom:.1rem;}
+.content li.view p.pic img{ width:100%;}
+.content li.view p span.topic{ float:left; color:#747474; line-height: .24rem;}
+.content li.view p a.vote{ float:right; display:inline-block; width:.32rem; height:.24rem; line-height:.24rem; padding:0 .1rem ; background-color:#ff8da2; color:#fff; text-align:center;}
+.
+.pages{ width:100%; margin-top:.4rem; margin-bottom: .4rem; text-align:center;}
+.pages a,.pages span{ color:#1bdc58; margin:0px 0.03rem; line-height:.24rem; padding:0.02rem 0.03rem}
+.pages a.active{ color:#fff; text-decoration:underline; background:#1bdc58;}
+.pages a.step:hover{color:#fff; text-decoration:underline; background:#1bdc58;}
+</style>
+</head>
+<body>
+<article class="content">
+    <ul id="content"></ul>
+  	<div class="pages">
+	  	<a href="javascript:void(0)" class="step">首页</a>
+	    <a href="javascript:void(0)" class="step">上一页</a>
+	    <span>|</span>
+	    <a class="num">1</a>
+	    <a class="num">2</a>
+	    <a class="num active">3</a>
+	    <a class="num">4</a>
+	    <a class="num">5</a>
+	    <a class="num">6</a>
+	    <a class="num">7</a>
+	    <a class="num">8</a>
+	    <a class="num">9</a>
+	    <a class="num">10</a>
+	    <span>|</span>
+	    <a href="javascript:void(0)" class="step">下一页</a>
+	    <a href="javascript:void(0)" class="step">末页</a>
+  	</div>
+</article>
+<script src="../../iphone/js/base/jquery.js"></script>
+<script type="text/javascript" src="../../iphone/js/base/framwork.js"></script>
+<script type="text/javascript" src="js/widget/iphone.waterfall.js"></script>   
+<script>
+  	
+  	icom.screenTo169(false);//article标签高度适配，把iphone4拉伸至iphone5，默认值true
+	
+	var content=$("#content");
+	
+	//瀑布流初始化
+	content.waterfallInit();
+	
+	$("div.pages a.num").on("click",num_click);
+	$("div.pages a.num").on("mouseenter",num_mouseover);
+	$("div.pages a.num").on("mouseleave",num_mouseleave);
+	var pageNow=0;
+	function num_click(e){
+		$(this).addClass("active").siblings().removeClass("active");
+		pageNow=$("div.pages a.num").index(this);
+		//测试瀑布流刷新
+		addList();
+	}//end func
+	function num_mouseover(e){
+		$(this).addClass("active");
+	}//end func
+	function num_mouseleave(e){
+		if($("div.pages a.num").index(this)!=pageNow) $(this).removeClass("active");
+	}//end func
+	$("div.pages a.num").eq(pageNow).click();
+	
+	$("div.pages a.step").on("click",step_click);
+	function step_click(e){
+		addList();
+	}//end func
+
+	
+	function addList(){
+		for(var i=0; i<24; i++){
+			var li=$('<li class="view"><p class="pic"></p><p><span class="topic"></span><a class="vote"></a></p></li>').appendTo(content);
+			var id=imath.randomRange(1,12);
+			var imgBox=li.children("p.pic");
+			var img=$("<img/>").attr({src:"images/p"+id+".jpg"}).appendTo(imgBox);
+			img.click(function(e) {
+				var view=$("#viewLayer");
+				var imgBox=view.children("p.pic").empty();
+				var img=$("<img/>").attr({src:$(this).attr("src")}).appendTo(imgBox);
+               	//view.popOn();
+            });
+			var topic=li.find("span.topic").html("第"+(i+1)+"个");
+			var vote=li.find("a.vote").html(imath.randomRange(0,100)+100);
+		}//end for
+		content.waterfallAdd();
+	}//end func
+
+	
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>双指触控</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+span{display: block; margin: 2rem auto 0; width: 50%; }
+span img{ width: 100%; -webkit-transform-origin: 50% 50%;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<article>
+	<span><img src="images/girl.jpg" /></span>
+</article>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script>
+
+
+$(document).ready(function(e) {
+	
+	icom.screenTo169(false);
+	
+	var articleBox=$('article');
+	var spanBox=articleBox.children('span');
+	var imgBox=spanBox.children();
+	
+	
+	
+	spanBox.data({x:0,y:0,scale:1,rotate:0});
+   	articleBox.on('pinchmove',img_pinchmove).on('pinchscale',img_pinchscale).on('pinchrotate',img_pinchrotate);
+   
+   	function img_pinchmove(e,xOffset,yOffset){
+   		var data=spanBox.data();
+   		data.x+=xOffset;
+   		data.y+=yOffset;
+   		spanBox.css({x:data.x,y:data.y});	
+   	}//end func
+   	
+   	function img_pinchscale(e,scaleOffset){
+   		var data=spanBox.data();
+   		data.scale+=scaleOffset;
+   		data.scale=data.scale<0.1?0.1:data.scale;
+   		data.scale=data.scale>2.5?2.5:data.scale;
+   		imgBox.css({scale:data.scale});	
+   	}//end func
+   	
+   	function img_pinchrotate(e,rotateOffset){
+   		var data=spanBox.data();
+   		data.rotate+=rotateOffset;
+// 		data.rotate=data.rotate>360?360:data.rotate;
+// 		data.rotate=data.rotate<-360?-360:data.rotate;
+   		imgBox.css({rotate:data.rotate});	
+   	}//end func
+   
+});
+</script>
+</body>
+</html>

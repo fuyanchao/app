@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>微信自定义分享</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+a.btnShare{display:block; width:50%; height:1rem; line-height: 1rem; text-align: center; background:#000; color: #fff; font-size: .32rem; margin:.4rem auto;}
+a.btnChg{display:block; width:50%; height:1rem; line-height:1rem; text-align:center; background:#000; color:#fff; font-size:.32rem; margin:.4rem auto;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+
+<a class="btnShare">分享按钮</a>
+
+<a class="btnChg" id="btnTest">改变微信分享内容</a>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="../../iphone/js/base/monitor.js"></script>
+<script src="../../iphone/js/base/share.js"></script>
+<script>
+$(document).ready(function(e) {
+	init();
+	
+	function init(){
+		
+		ishare.btnShare();//如果页面里有分享按钮，则用此命令使分享按钮起作用，在微信下弹窗分享提示层，在浏览器下用微博外链式分享
+		ishare.wxShareSuccess=function(){//分享成功后回调函数
+			icom.alert('分享成功');
+		}//end func;
+		ishare.wxShareCancel=function(){//分享取消后回调函数
+			icom.alert('分享取消');
+		}//end func;
+		
+		
+		//重新设置默认微信分享内容
+		var share={};
+		share.link='http://t.cloud.be-xx.com/framework/iphone_widget/share/';
+		share.image=ishare.url+'images/share1.jpg';
+		share.title='挑战月相达人，分秒必争赢好礼！';
+		share.friend=share.timeline='史上最难月相达人挑战赛，我已打败的选手，等你来超越！';
+		ishare.reset(share);
+		
+		
+		//点击按钮改变分享内容
+		$('#btnTest').click(function(e) {
+			var share={};
+			share.link='http://t.cloud.be-xx.com/framework/iphone/';
+			share.image=ishare.url+'images/share2.jpg';
+			share.title='卡地亚 The Proposal';
+			share.friend=share.timeline=share.other='我的挚爱告白。开启红盒，见证我们的一生一世';
+			ishare.reset(share);
+			icom.alert('已改变分享内容');
+		});
+		
+		
+	}//end init
+	
+});
+</script>
+</body>
+</html>

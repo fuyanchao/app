@@ -1,0 +1,73 @@
+/* ---------------------------------------- css content 内容部分（针对16:9标准屏）----------------------------------------*/
+body{ background-color:#fff; color:#000;}
+a,a:visited{ color:#000;}
+
+.moments{ min-height: 100%; height: auto; overflow: visible;}
+.moments header{ width: 100%; height: 6.4rem; background-image: url(../images/moments/header.jpg); position: relative; margin-bottom: 0.5rem; position: relative;}
+.moments header .head{ position: absolute; right: 0.2rem; bottom: -0.5rem; width: 1.4rem; height: 1.4rem; border: 0.05rem solid #fff; box-shadow: 0 0 0.05rem #888;}
+.moments header .head img{ width: 100%; height: 100%;}
+.moments header .nickname{ position: absolute; right: 2rem; bottom: 0.2rem; font-size: .3rem; font-weight: bold; color: #fff; text-shadow:0 1px #13131c;}
+
+.moments .list{padding: 0.3rem 0.3rem; border-bottom: 1px solid #d4d4d4; display: flex;}
+.moments .list>.avtar{width: 0.7rem; margin-right: 0.2rem;}
+.moments .list>.avtar img{width: 100%}
+.moments .list>.content{ flex: 1;}
+.moments .list>.content>p.name{font-size: 0.28rem; line-height: 0.28rem; color: #586993; margin-bottom: 0.2rem;}
+.moments .list>.content>p.word{font-size: 0.28rem; line-height: 0.34rem; color: #010101; margin-bottom: 0.2rem;}
+.moments .list>.content>p.video{ margin-bottom: 0.1rem; position: relative;}
+.moments .list>.content>p.video img{ width: 4.4rem;}
+.moments .list>.content>p.video a{ position: absolute; left: 2.2rem; top: 50%; width: 1.2rem; height: 1.2rem; margin-left: -0.6rem; margin-top: -0.6rem; background-image: url(../images/moments/btn_play.png);}
+
+.moments .list>.content>p.btns{ position: relative; margin-bottom: 0.2rem;}
+.moments .list>.content>p.btns:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+.moments .list>.content>p.btns>span.time{ color: #767676; font-size: .18rem;}
+.moments .list>.content>p.btns>a.btnMore{ position: absolute; right: -0.3rem; top: -0.3rem; width: .38rem; height: .28rem; padding: 0.3rem;}
+.moments .list>.content>p.btns>a.btnMore span{ display:inline-block; width: 100%; height: 100%; background-image: url(../images/moments/btn_more.png);}
+.moments .list>.content>p.btns>span.panelMore{ position: absolute; right: .45rem; top: -.2rem; background-color: #4c5154; border-radius: .1rem; padding: .15rem .1rem; display: none;}
+.moments .list>.content>p.btns>span.panelMore:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+.moments .list>.content>p.btns>span.panelMore>span{ float: left; display: inline-block; width: 1px; height: .34rem; background-color: #373d40;}
+.moments .list>.content>p.btns>span.panelMore>a{ float: left; padding: 0 .4rem;}
+.moments .list>.content>p.btns>span.panelMore>a>img{ width: .34rem; float: left;}
+.moments .list>.content>p.btns>span.panelMore>a>span{ font-size: .3rem; line-height: .34rem; color: #fff; margin-left: .1rem; float: left;}
+
+.moments .list>.content>p.pics{ margin-bottom: 0.2rem;}
+.moments .list>.content>p.pics:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+.moments .list>.content>p.pics img{float: left; margin-right: .08rem; margin-bottom: .08rem;width: 1.5rem;height: 1.5rem;}
+
+.moments .list>.content>a.link{ background-color: #f3f3f5; padding: .1rem .2rem .1rem .1rem; display: flex; margin-bottom: 0.1rem;}
+.moments .list>.content>a.link img{ width: 0.8rem; height: 0.8rem; margin-right: 0.1rem;}
+.moments .list>.content>a.link span{ font-size: 0.28rem; line-height: 0.4rem; color: #000; flex: 1;}
+
+.moments .list>.content .comments{ background-color: #f4f4f6; position: relative;}
+.moments .list>.content .comments .price{ color: #576b95; font-size: 0.24rem; line-height: 0.34rem; border-bottom: 1px solid #dddedf; padding: 0.1rem 0.2rem; }
+.moments .list>.content .comments .price i{background-image: url(../images/moments/ico-zan.png);width: 0.24rem;height: 0.24rem; line-height: 0.34rem; display: inline-block;}
+.moments .list>.content .comments .price span{ font-size: 0.24rem; line-height: inherit; color: inherit;}
+.moments .list>.content .comments .comment{border-top: 1px solid #fff; padding: 0.1rem 0.2rem 0.1rem;}
+.moments .list>.content .comments .comment p{ margin-bottom: 0.1rem; font-size: 0.24rem; line-height: 0.34rem;}
+.moments .list>.content .comments .comment p span.name{font-size: 0.24rem; line-height: inherit; color: #576b95;}
+.moments .list>.content .comments .comment p span.word{font-size: 0.24rem; color: #000;}
+.moments .list>.content .comments .comment p img.wechat-emoji{ width: 0.3rem; line-height: 0.32rem; padding: 0 0.05rem;}
+.moments .list>.content .comments i.ar{ position: absolute; left: 0.2rem; top: -0.1rem; width: 0.24rem; height: 0.1rem; background-image: url(../images/moments/ar.png);}
+
+
+aside.comment{ position: fixed; left: 0; top: 0; width: 100%; height: 100%; opacity: 0; z-index: 99;}
+aside.comment>.bg{width: 100%; height: 100%;}
+aside.comment>.cont{position: absolute; left: 0; bottom: 0; width: 100%; background-color: #f5f5f7;}
+aside.comment>.cont .panel{padding: .15rem .15rem; border-top: 1px solid #c5c5c7; background-color: #f5f5f7; display: flex;}
+aside.comment>.cont .panel input{ width: 4rem; height: .58rem; line-height: .58rem; padding: 0 .2rem; border: 1px solid #aeb0b4; border-radius: .1rem; background-color: #fefefe; color: #555; font-size: .3rem; font-weight: normal; flex: 1; margin-right: .15rem;}
+aside.comment>.cont .panel input:disabled{color: #555;}
+aside.comment>.cont .panel input[disabled=disabled]{color: #555;}
+aside.comment>.cont .panel input::-webkit-input-placeholder,input:focus::-webkit-input-placeholder{color:#ccc;}
+aside.comment>.cont .panel a.btnEmoji{ width: .58rem; height: .58rem; background-image: url(../images/input/btn_face.png); margin-right: .15rem;}
+aside.comment>.cont .panel a.btnKeyboard{background-image: url(../images/input/btn_keyboard.png);}
+aside.comment>.cont .panel a.btnSend{ width: 1rem; height: 0.58rem; line-height: 0.58rem; background-color: #0078fe; border: 1px solid #0078fe; border-radius: 0.1rem; font-size: 0.3rem; color: #fff; text-align: center;}
+aside.comment>.cont .emoji{ height: 3.3rem; padding: 0.2rem 0.2rem 0; background-color: #f6f6f8;}
+aside.comment>.cont .emoji>div{position:relative; width:100%; height:2.5rem; touch-action: pan-x pan-y;}
+aside.comment>.cont .emoji>div a.boxList { display:block; margin-top: 0.3rem; width:100%; text-align:center;}
+aside.comment>.cont .emoji>div a.boxList span{ display:inline-block; width:.2rem; height:.2rem; margin:0 .1rem; background-color:#bbbbbb; border-radius:50%;}
+aside.comment>.cont .emoji>div a.boxList span.active{background-color:#8b8b8b; }
+aside.comment>.cont .emoji>div .boxMask{width:100%; height:100%; overflow:hidden; position:relative;}
+aside.comment>.cont .emoji>div .boxMask ul{ position:absolute; display: flex;}
+aside.comment>.cont .emoji>div .boxMask ul.moving{will-change:transform;}
+aside.comment>.cont .emoji>div .boxMask ul li{ display:block; text-align:center;}
+aside.comment>.cont .emoji>div .boxMask ul li img{ width: 0.5rem; margin: 0.2rem 0.15rem; -webkit-user-select:none; -webkit-touch-callout: none;}

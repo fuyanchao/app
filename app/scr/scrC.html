@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>横向循环滚动</title>
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+article.templet{ background-image:url(images/common/bg.jpg);}
+article.templet .imgBox{ width:92%; height:4.26rem; margin:1rem auto .2rem; position:relative; background-size:100% 100%; box-shadow:0 0 .4rem #333;}
+article.templet .imgBox img{ width:100%;}
+article.templet p.btn{ position:relative; width:100%; text-align:center; margin-top:.2rem;}
+article.templet p.btn img.dian{ position:absolute; left:18%; top:0; width:15%;-webkit-animation:rotate 4s ease infinite;}
+article.templet p.btn img.kp{ position:absolute; right:20%; top:.3rem; width:18%;}
+article.templet p.btn a{ position:absolute; left:38%; top:-.1rem; width:20%;}
+article.templet p.btn a img{ -webkit-animation:breath1 4s linear infinite;}
+article.templet p.btn a i{ position: absolute; left:0; top:0; width:100%; height:100%; background-size:100% 100%; background-image:url(images/camera/btn_camera_light.png); display:block; -webkit-animation:breath2 4s linear infinite;}
+
+
+.scrC{ width:100%; height:1.04rem; padding:.2rem 0; background:rgba(0,0,0,0.3); position:relative; touch-action: pan-x pan-y;}
+.scrC a.boxBtnL{ position:absolute; left:.1rem; top:50%; width:.24rem; height:.68rem; margin-top: -.34rem; background-image:url(images/camera/ar_l.png); }
+.scrC a.boxBtnR{ position:absolute; right:.1rem; top:50%; width:.24rem; height:.68rem; margin-top: -.34rem; background-image:url(images/camera/ar_r.png); }
+.scrC .boxMask{ width:5.6rem; height:100%; margin:0 auto; position:relative; overflow:hidden;}
+.scrC .boxMask ul{}
+.scrC .boxMask ul.moving{will-change:transform;}
+.scrC .boxMask ul li{ float:left; margin:.1rem; width:1.2rem; height:100%;}
+.scrC .boxMask ul li.active{ box-shadow:0 0 .2rem #fffca8;}
+.scrC .boxMask ul li img{ width:100%;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<article class="templet">
+	<div class="imgBox"></div>
+    <div class="scrC">
+    	<div class="boxMask">
+        	<ul class="boxCont">
+          		<li><img src="images/camera/thumb1.jpg"></li>
+                <li><img src="images/camera/thumb2.jpg"></li>
+                <li><img src="images/camera/thumb3.jpg"></li>
+                <li><img src="images/camera/thumb4.jpg"></li>
+                <li><img src="images/camera/thumb5.jpg"></li>
+        	</ul>
+      	</div>
+      	<a class="boxBtnL"></a>
+      	<a class="boxBtnR"></a>
+    </div>
+</article>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.scrC.js"></script>
+<script>
+$(document).ready(function(e) {
+	
+	/*
+	 * scrC(option):开启插件
+		 * 参数：
+		 * onStart:滚动开始的callbask，会返回当前所处第几个单元的数值
+		 * onComplete:滚动开始的callbask，会返回当前所处第几个单元的数值
+		 * auto:是否开启自动滚动，默认值false
+		 * swipe:是否开启滑动滚动,默认值true
+		 * speed:滚动速度,默认值1000
+		 * delay:滚动间隔,默认值5000
+		 * onStart:开始移动的回调函数
+		 * onComplete:结束移动的回调函数
+		 * onOff:插件关闭的回调函数,传递引用插件的jquery对象
+	 * 
+	 * scrCPrev()：向前一个单元
+	 * 
+	 * scrCNext()：向后一个单元
+	 * 
+	 * scrCStop()：停止自动滚动
+	 * 
+	 * scrCPlay()：继续自动滚动
+	 * 
+	 * scrCOff()：关闭插件
+	 */
+		
+	var scrBox=$('.scrC');
+	var thumbBox=scrBox.find('li');
+	var thumbSign=thumbBox.find('.sign');	
+	var templetId = 0;
+	
+	scrBox.scrC(); 
+	
+	thumbBox.on('click', thumbBox_click);
+	
+	thumbBox.eq(0).click();
+	
+	//---------------------------------------------------templet
+	function thumbBox_click(e){
+		$(this).addClass('active').siblings().removeClass('active');
+		templetId=$(this).data('id');
+		console.log('templetId:'+templetId);
+		$('.imgBox').css({ backgroundImage: 'url(images/camera/bg' + (templetId + 1) + '.jpg)' });
+	}//end func
+
+	
+});
+</script>
+</body>
+</html>

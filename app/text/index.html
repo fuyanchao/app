@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>文字特效</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" type="text/css" href="../../iphone/css/common.css" />
+<style>
+	h3{ text-align: center; margin: .5rem 0; font-size: .48rem; letter-spacing: 0.02rem;}
+	h4{ text-align: center; margin: .4rem 0; font-size: .32rem;}
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------------->
+<article>
+	<h3>
+		<div class="texts">
+          <p>第一行文字第一行文字第一行文字第一行文字第一行文字</p>
+          <p>第二行文字第二行文字第二行文字第二行文字第二行文字</p>
+		</div>
+	</h3>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+	<h4>demo文字demo文字demo文字demo文字</h4>
+</article>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<link href="js/text/animate.css" rel="stylesheet">
+<script src="js/text/jquery.lettering.js"></script>
+<script src="js/text/jquery.textillate.js"></script>
+<script>
+	
+	/*
+	 * 
+	 * textillate.js详细使用说明请参考
+	 * https://github.com/jschr/textillate
+	 * http://www.yyyweb.com/demo/textillate/
+	 * 
+	 */
+	
+	
+  $(function (){
+	
+
+	init();
+	
+	function init(){
+		$('h3').textillate({loop: true, in: { effect: 'rollIn',callback: function () {
+			console.log('in complete');
+		}}, out: {effect: 'hinge',callback: function () {
+			console.log('out complete');
+		}} });
+		$('h4').eq(0).textillate({ in: { effect: 'zoomIn'} });
+		$('h4').eq(1).textillate({ in: { effect: 'bounceIn' } });
+		$('h4').eq(2).textillate({ in: { effect: 'flash' } });
+		$('h4').eq(3).textillate({ in: { effect: 'zoomIn' } });
+		$('h4').eq(4).textillate({ in: { effect: 'rubberBand' } });
+		$('h4').eq(5).textillate({ in: { effect: 'shake' } });
+		$('h4').eq(6).textillate({ in: { effect: 'swing' } });
+		$('h4').eq(7).textillate({ in: { effect: 'lightSpeedIn' } });
+		$('h4').eq(8).textillate({ in: { effect: 'rollIn'}  });
+	}//end func
+
+	
+});
+
+	
+</script>
+</body>
+</html>

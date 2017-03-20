@@ -1,0 +1,200 @@
+/* iphone版微信内置浏览器工具栏高度为128像素(ip4-ip6/设备像素比x2)/192像素(ip6plus/设备像素比x3)，经过设备像素比缩放后都折算成64像素；android版微信工具栏高度是110像素； */
+/* iphone4/4s screen:320x480/weixin:320x416 */
+/* iphone5/5s weixin:320x568/320x504 */
+/* iphone6 weixin:375x667/375x603 */
+/* iphone6 plus weixin:414×736/414x672 渲染分辨率:1242×2208*/
+/* android weixin:480x854/weixin:480x744 */
+/* android weixin:540x960/weixin:540x850 */
+
+/*iphone版微博APP内置浏览器上下工具栏高度为216像素(设备像素比x2)/324像素(ip6plus/设备像素比x3)，经过设备像素比缩放后都折算成108像素,此数据与safari浏览器保持一致；android版微博工具栏高度是180像素；*/
+/*iphone4/4s:640x744(320x372)*/
+/*iphone5/5s:640x920(320x460)*/
+/*iphone6:750x1118(375x559)*/
+/*iphone6 plus:1242×1884（414x628）*/
+/*android 540P/720P:540×780*/
+/*android 1080P:540×790*/
+
+@charset "UTF-8";
+/* ---------------------------------------- css base 基础部分开始---------------------------------------- */
+* {margin:0;padding:0; border:0; word-break:normal; font-family:Arial;}
+html,body{ width:100%; height:100%; -webkit-text-size-adjust: 100%!important;}
+table{border-collapse:collapse;border-spacing:0;}
+th,tr,td,h1,h2,h3,h4,h5,h6,i,b,em{font-style:normal;font-weight:normal;}
+ol,ul,li {list-style-type:none; display:block;}
+select,input,img{vertical-align:middle;border:none;outline:none;}
+textarea {resize: none;} /*webkit核心中textare取消拖动调整大小*/
+textarea:focus {outline: none;} /*textarea聚焦时默认边框颜色不变*/
+select,input[type=text],input[type=tel],input[type=password],input[type=number],textarea{ -webkit-appearance:none; border:none; border-radius:0; background-color:transparent;}
+video{ background:#000;}
+a{ text-decoration:none; display:inline-block;}
+.clearFix {display: block;}
+.clearFix:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+.img100>img{ width:100%;}
+.bg100{ background-size:100% 100%;}
+.arial{font-family:Arial;}
+.helv{font-family:Helvetica;}
+.none{ display:none;}
+.noEvent{pointer-events:none;}/* 禁止触摸互动事件 */
+.noDefault{-webkit-touch-callout: none;}/* 禁止ios 长按时不触发系统的菜单，禁止ios&android长按时下载图片 */
+.noSelect{-webkit-user-select:none;}/* 禁止ios和android用户选中文字 */
+
+
+/*media font-size*/
+@media screen{html{font-size:10px;}}
+@media screen and (device-width:320px){html{font-size:10px;}}
+@media screen and (device-width:375px){html{font-size:11.7px;}}
+@media screen and (device-width:414px){html{font-size:12.9px;}}
+@media screen and (min-width:480px){html{font-size:15px;}}
+@media screen and (min-width:512px){html{font-size:16px;}}
+@media screen and (min-width:540px){html{font-size:16.9px;}}
+@media screen and (min-width:576px){html{font-size:18px;}}
+@media screen and (min-width:640px){html{font-size:20px;}}
+@media screen and (min-width:720px){html{font-size:22.5px;}}
+@media screen and (min-width:800px){html{font-size:25px;}}
+
+/* ---------------------------------------- css base 基础部分结束---------------------------------------- */
+
+/* ---------------------------------------- 公共部分开始 ---------------------------------------- */
+
+/* -------------弹出层----------------*/
+
+/* load浮层*/
+.loadBox{ position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:996; display:none;}
+.loadBox span{ display:block; position:absolute; left:50%; top:50%; margin-left:-1rem; margin-top:-1rem; -webkit-transform:scale(0.5);}
+.loadBox span i{ display:block; position:absolute; left:0; top:0; width:2rem; height:0.8rem; border-radius:0.4rem; background:rgba(255,255,255,0.7); box-shadow:0 0 0.5rem rgba(255,255,255,1);}
+.loadBox span i:nth-child(1){ -webkit-transform:translate(3rem, 0rem) rotate(0deg); -webkit-animation:loadCircle 2.4s 0s linear infinite;}
+.loadBox span i:nth-child(2){ -webkit-transform:translate(2.598rem, 1.5rem) rotate(30deg); -webkit-animation:loadCircle 2.4s 0.2s linear infinite;}
+.loadBox span i:nth-child(3){ -webkit-transform:translate(1.5rem, 2.598rem) rotate(60deg); -webkit-animation:loadCircle 2.4s 0.4s linear infinite;}
+.loadBox span i:nth-child(4){ -webkit-transform:translate(0rem, 3rem) rotate(90deg); -webkit-animation:loadCircle 2.4s 0.6s linear infinite;}
+.loadBox span i:nth-child(5){ -webkit-transform:translate(-1.5rem, 2.598rem) rotate(120deg); -webkit-animation:loadCircle 2.4s 0.8s linear infinite;}
+.loadBox span i:nth-child(6){ -webkit-transform:translate(-2.598rem, 1.5rem) rotate(150deg); -webkit-animation:loadCircle 2.4s 1.0s linear infinite;}
+.loadBox span i:nth-child(7){ -webkit-transform:translate(-3rem, 0rem) rotate(180deg); -webkit-animation:loadCircle 2.4s 1.2s linear infinite;}
+.loadBox span i:nth-child(8){ -webkit-transform:translate(-2.598rem, -1.5rem) rotate(210deg); -webkit-animation:loadCircle 2.4s 1.4s linear infinite;}
+.loadBox span i:nth-child(9){ -webkit-transform:translate(-1.5rem, -2.598rem) rotate(240deg); -webkit-animation:loadCircle 2.4s 1.6s linear infinite;}
+.loadBox span i:nth-child(10){ -webkit-transform:translate(0rem, -3rem) rotate(270deg); -webkit-animation:loadCircle 2.4s 1.8s linear infinite;}
+.loadBox span i:nth-child(11){ -webkit-transform:translate(1.5rem, -2.598rem) rotate(300deg); -webkit-animation:loadCircle 2.4s 2.0s linear infinite;}
+.loadBox span i:nth-child(12){ -webkit-transform:translate(2.598rem, -1.5rem) rotate(330deg); -webkit-animation:loadCircle 2.4s 2.2s linear infinite;}
+.loadBox b{ display:block; position:absolute; left:0; top:50%; width:100%; height:2rem; line-height:2rem; margin-left:-0.5rem; margin-top:-1.7rem; text-align:center; font-size:1rem; color:rgba(255,255,255,0.7);}
+
+/* 翻转提示浮层*/
+aside.turnBox{ position:fixed; left:0; top:0; width:100%; height:100%; background:#000; z-index:999;}
+aside.turnBox img.turn{ display:block; padding-top:8%; margin:0 auto 5%; width:40%;}
+aside.turnBox p{ text-align:center; font-size:1rem; color:#fff;}
+
+/* 分享浮层*/
+aside.shareBox{position:fixed; left:0; top:0; width:100%; height:100%; text-align:center; background:rgba(0,0,0,0.85); z-index:997; display:none;}
+aside.shareBox>img{ width:80%; margin:2rem auto 0;}
+
+/* 取代系统alert的警告提示弹窗*/
+aside.alertBox{ position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:998; display:none;}
+aside.alertBox>div{background-color:#fff; width:80%; padding:2rem 0; border-radius:1rem; box-shadow:0 0 1rem #000; margin:12rem auto 0;}
+aside.alertBox>div p{ text-align:center;}
+aside.alertBox>div p.text{ margin-bottom:2rem; font-size:1.6rem; color:#222;}
+aside.alertBox>div p.btn a{ font-size:1.6rem; padding:0.5rem 2rem; color:#fff; background:#222; letter-spacing:0.2rem; border-radius:0.3rem;}
+
+/* 视频*/
+aside.videoBox{position:fixed; left:0; top:0; width:100%; height:100%; background:#000; z-index:996; display:none;}
+aside.videoBox iframe,#videoBox video{width:100%; position:absolute; left:0; overflow:hidden;}
+aside.videoBox a.close{ position:absolute; right:2rem; top:2rem; width:3rem; height:3rem; background: url(../images/common/close_video.png); background-size:100% 100%;}
+a.btnVideo,#btnVideo{ position:relative;}
+a.btnVideo video,#btnVideo video,a.btnVideo iframe,#btnVideo iframe{ position:absolute; left:0; top:0; width:100%; height:100%; overflow:hidden; opacity:0;}
+
+/* 遮罩层*/
+.maskBox{ position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:99; display:none;}
+.whiteBox{ position:fixed; left:0; top:0; width:100%; height:100%; background:#fff; z-index:99; display:none;}
+.blackBox{ position:fixed; left:0; top:0; width:100%; height:100%; background:#000; z-index:99; display:none;}
+.blankBox{ position:fixed; left:0; top:0; background-image: url(../images/common/blank.png); background-size:100% 100%; z-index:99; display:none;}
+
+/* div弹窗的半透明遮罩层*/
+.popBox{ position:fixed; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:99;}
+.popBox>div{position:absolute; left:0; top:0; background-size:100% 100%; display:none;}
+.popBox>div>a.close{position:absolute; right:1.5rem; top:1.5rem; width:2rem; height:2rem; background:url(../images/common/close.png); background-size:100% 100%;}
+
+/* 照片文件选择框*/
+#fileBox{ position:absolute; right:0; bottom:0; opacity:0; width:1px; height:1px; overflow:hidden;}
+
+/* 电子罗盘数据面板*/
+#compassPanel{ width:40%; background:rgba(0,0,0,0.5); position:absolute; right:0; top:0; display:none;}
+#compassPanel h3{color:#fff; background:rgba(255,255,255,0.2); padding:0.5rem 1rem; margin-bottom:0.5rem;}
+#compassPanel p{ color:#fff; font-size:1.1rem; margin-bottom:0.5rem; margin-left:1rem;}
+#compassPanel p input[type=text]{ -webkit-appearance:none;}
+
+/*分享缩略图*/
+img.shareImage{ position:absolute; left:0; top:0; width:0; height:0;}
+
+/*测试版本提示信息*/
+#signBar{position:absolute; top:0; left:0; width:100%; background:rgba(0,0,0,0.7); box-shadow:0 0.1rem 0.5rem #888; padding:0.5rem 0; text-align:center; pointer-events:none; z-index:99;}
+#signBar span{font-size:1.6rem; text-shadow:0 0 0.1rem #000; color:rgba(255,255,255,0.9);}
+
+/* -------------标签模块----------------*/
+body{ background:#fff; color:#000;}
+article{ width:100%; height:100%; position:relative; background-size:100% 100%;}
+a,a:visited{ color:#000;}
+a>img{ width:100%;}
+input::-webkit-input-placeholder,input:focus::-webkit-input-placeholder{color:#000;}
+
+/* ---------------------------------------- 公共部分结束 ---------------------------------------- */
+
+
+/* ---------------------------------------- 内容部分开始 ----------------------------------------*/
+/* 默认CSS适配 16:9标准屏幕,苹果系列：iphone5/5s、iphone 6/6 plus;带物理工具栏按键的安卓系列:如三星、小米 */
+
+article.index{}
+
+/* ---------------------------------------- 内容部分结束 ----------------------------------------*/
+
+/*----------------------------------------- css3 media手机适配部分开始 --------------------------------------------*/
+
+/*------------------ 针对非16:9的短屏，苹果系列：iphone4，480X800的最低端安卓机和无物理工具栏按键的安卓系列：如sony、LG------------------*/
+/* iphone4/4s screen:320x480/weixin:320x416 */
+/* android screen:480x800/weixin:480x690 */
+/* android screen:540x890/weixin:540x780 */
+@media screen and (device-width:320px) and (max-height:480px), screen and (width:480px) and (max-height:690px), screen and (width:540px) and (max-height:780px){
+
+}
+
+/*------------------ 针对iphone4 only ------------------*/
+@media screen and (device-width:320px) and (device-height:480px){
+
+}
+
+/*------------------ 针对iphone5 only------------------*/
+@media screen and (device-width:320px) and (device-height:568px){
+
+}
+
+/*------------------ 针对iphone6 only ------------------*/
+@media screen and (device-width:375px) and (device-height:667px){
+
+}
+
+/*------------------ 针对iphone6 plus only ------------------*/
+@media screen and (device-width:414px) and (device-height:736px) and (-webkit-min-device-pixel-ratio:3){
+
+}
+
+
+/*------------------ 针对iphone全系列 ------------------*/
+@media screen and (device-width:320px) and (device-height:480px), screen and (device-width:320px) and (device-height:568px), screen and (device-width:375px) and (device-height:667px), screen and (device-width:414px) and (device-height:736px) and (-webkit-min-device-pixel-ratio:3){
+
+}
+
+/*------------------ 针对android全系列 ------------------*/
+@media screen and (min-width:480px){
+
+}
+
+/*----------------------------------------- css3 media手机适配部分结束 --------------------------------------------*/
+
+/*----------------------------------------- css3 animation 动画部分开始 -----------------------------------------*/
+
+@-webkit-keyframes loadCircle{
+	0%{ opacity:1;}
+	8.3%{opacity:0;}
+	50%{opacity:1;}
+	100%{opacity:1;}
+}
+
+/*----------------------------------------- css3 animation 动画部分结束 -----------------------------------------*/

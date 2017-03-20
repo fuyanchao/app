@@ -1,0 +1,17 @@
+var chatMember=[];
+var chatData=[];
+chatData.push({style:'other',type:'text',text:'HI，我是小猎豹郑恺，欢迎加入我的新味小分队！'});
+chatData.push({style:'me',type:'text',text:'我不信你是恺爷...'});
+chatData.push({style:'other',type:'voice',voice:'sound/voice.mp3',dur:4});
+chatData.push({style:'other',type:'image',image:'images/pic/1.gif'});
+chatData.push({style:'me',type:'text',text:'信啦！求恺爷多发表情！'});
+chatData.push({style:'other',type:'image',image:'images/pic/11.gif'});
+chatData.push({style:'other',type:'image',image:'images/pic/7.gif'});
+chatData.push({style:'other',type:'image',image:'images/pic/6.gif'});
+chatData.push({style:'other',type:'text',text:'多卖力的表情包！恺恺真业界良心！',head:'images/chat/pizzahut.jpg'});
+chatData.push({style:'me',type:'text',text:'疯狂点赞！好想得到全套表情！'});
+chatData.push({style:'other',type:'text',text:'现在去必胜客买套餐就能获得表情贴纸哦！',head:'images/chat/pizzahut.jpg'});
+chatData.push({style:'other',type:'text',text:'等不及的小铠甲们，此处获取恺恺表情包，抢先玩起来！<br/>Step 1：关注必胜客官方微信，在后台回复“恺恺表情包” → <br/>Step 2：然后在电脑上打开回复推送的链接，保存文中的gif表情动图 → <br/>Step 3：再把存下的gif动图发送回你的手机',head:'images/chat/pizzahut.jpg',delay:3000});
+chatData.push({style:'other',type:'text',text:'快，快把萌萌的我带回家！'});
+chatData.push({style:'me',type:'text',text:'啊！我竟然和恺恺聊天了！心情要久久不能平复惹！我得赶紧发个朋友圈！'});
+chatData.push({style:'other',type:'text',text:'如果让更多人知道我们新味小分队，小猎豹独家福利任你拿～数量有限，先到先得！（彩蛋彩蛋：还能获得看我朋友圈的权限哦～'});

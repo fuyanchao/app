@@ -1,0 +1,78 @@
+i.hand{ display: block; position: absolute; width: .5rem; height: .7rem; pointer-events: none; z-index: 9;}
+i.hand b{ display: block; width: 100%; height: 100%; background-image: url(../images/common/hand.png); -webkit-animation: hand 2s 0s ease infinite;}
+@-webkit-keyframes hand{
+	0%{-webkit-transform: scale(1.5); opacity: 1;}
+	30%{-webkit-transform: scale(1); opacity: 1;}
+	50%{-webkit-transform: scale(1); opacity: 1;}
+	70%{-webkit-transform: scale(1); opacity: 0;}
+	100%{-webkit-transform: scale(1); opacity: 0;}
+}
+
+article{  background-color: #ececec;}
+section{ position: absolute; left: 0; top: 0; width: 100%; height: 100%;}
+
+section.interface{ overflow: hidden;}
+section.interface>div{ position: relative;}
+section.interface>div.chatInterface{position: relative; width: 100%; overflow:hidden; touch-action: pan-x pan-y;}
+section.interface>div.chatInterface .panel{position:absolute; top:0; right:.02rem; width:.05rem; height:100%;}
+section.interface>div.chatInterface .panel i{ display:block; width:100%; background-color:rgba(0,0,0,0.5); position:absolute; left:0; top:0;}
+section.interface>div.chatInterface .cont{ position:absolute; left:0; top:0; width:100%; overflow:hidden;}
+section.interface>div.chatInterface .cont>div{ margin-bottom: .2rem;}
+section.interface>div.chatInterface .cont>div:first-child{ margin-top: 0.2rem;}
+section.interface>div.chatInterface .cont>div:last-child{ margin-bottom: 0.5rem;}
+section.interface>div.chatInterface .cont>div.time{ text-align: center;}
+section.interface>div.chatInterface .cont>div.time span{ display: inline-block; padding: .1rem; background-color: #cfcfcf; border-radius: .1rem; color: #fff; font-size: .18rem;}
+section.interface>div.chatInterface .cont>div.join{ text-align: center;}
+section.interface>div.chatInterface .cont>div.join span{ display: inline-block; padding: .1rem; background-color: #cfcfcf; border-radius: .1rem; color: #fff; font-size: .18rem;}
+section.interface>div.chatInterface .cont>div.welcome{ text-align: center;}
+section.interface>div.chatInterface .cont>div.welcome span{ display: inline-block; padding: .1rem; background-color: #cfcfcf; border-radius: .1rem; color: #fff; font-size: .24rem;}
+section.interface>div.chatInterface .cont>div.chat .dialog{ min-width: 1rem; max-width: 4.2rem; display: inline-block; position: relative; border-radius: .1rem; }
+section.interface>div.chatInterface .cont>div.chat .dialog span{font-size: .25rem; color: #000; line-height: .3rem;}
+section.interface>div.chatInterface .cont>div.chat .dialog img.icon{ width: .34rem;}
+section.interface>div.chatInterface .cont>div.chat .dialog i.ar img{ width: 3.9rem; margin-top: -0.21rem; }
+section.interface>div.chatInterface .cont>div.other{ padding: 0 .15rem; position: relative;}
+section.interface>div.chatInterface .cont>div.other .head{ width: .7rem; height: .7rem; border: 1px solid #cdcdcd; position: absolute; left: .15rem; top: 0; }
+section.interface>div.chatInterface .cont>div.other .dialog{ margin-left: 1rem; padding: .2rem .2rem; background-color: #fff; border: 1px solid #dddddd; }
+section.interface>div.chatInterface .cont>div.other .dialog img.image{ margin-left: -0.2rem;}
+section.interface>div.chatInterface .cont>div.other .dialog i.ar{ position: absolute; left: -.13rem; top: .2rem; width: .13rem; height: .21rem; background-image: url(../images/chat/other_ar.png); -webkit-mask-image: url(../images/chat/other_ar.png);}
+section.interface>div.chatInterface .cont>div.me{ padding: 0 .15rem; position: relative;}
+section.interface>div.chatInterface .cont>div.me .head{ width: .7rem; height: .7rem; border: 1px solid #cdcdcd; position: absolute; right: .15rem; top: 0;}
+section.interface>div.chatInterface .cont>div.me .dialog{ margin-right: 1rem; float: right; padding: .2rem .2rem; background-color: #a0e75a; border: 1px solid #84d553;}
+section.interface>div.chatInterface .cont>div.me .dialog i.ar{ position: absolute; right: -.13rem; top: .2rem; width: .13rem; height: .21rem; background-image: url(../images/chat/me_ar.png);  -webkit-mask-image: url(../images/chat/me_ar.png);}
+section.interface>div.chatInterface .cont>div.me .dialog i.ar img{ margin-left: -3.7rem; }
+section.interface>div.chatInterface .cont>div.image .dialog{ padding: 0; background-color: none; border: none; border-radius:none;}
+section.interface>div.chatInterface .cont>div.image .dialog div.image{width: 3.7rem; border-radius:0.1rem; overflow: hidden;}
+section.interface>div.chatInterface .cont>div.image .dialog div.image img{  width: 3.9rem;}
+section.interface>div.chatInterface .cont>div.voice .dialog img.voice{ width: .3rem; margin-right: .8rem;}
+section.interface>div.chatInterface .cont>div.voice .dialog i.point{ position: absolute; right: -.36rem; top: 0.05rem; width: .16rem; height: .16rem; background-color: #eb4d4b; border-radius: 50%;}
+section.interface>div.chatInterface .cont>div.voice .dialog i.dur{ position: absolute; right: -.35rem; top: .36rem; font-size: .24rem; color: #aeaeae;}
+section.interface>div.chatInterface .cont>div.voice .dialog i.hand{ right: .2rem; bottom: -.2rem;}
+
+section.interface>div.inputInterface{ visibility: hidden;}
+section.interface>div.inputInterface>.panel{padding: .15rem .1rem; border-top: 1px solid #c5c5c7; background-color: #f5f5f7; position: relative; overflow: hidden;}
+section.interface>div.inputInterface>.panel a{ width: .5rem; height: .5rem; float: left; }
+section.interface>div.inputInterface>.panel a.btnRecord{ background-image: url(../images/input/btn_recored.png); }
+section.interface>div.inputInterface>.panel a.btnFace{ background-image: url(../images/input/btn_face.png);  margin-right: .1rem; float: right;}
+section.interface>div.inputInterface>.panel a.btnAdd{ background-image: url(../images/input/btn_add.png); float: right;}
+section.interface>div.inputInterface>.panel span{ display: inline-block; width: 4rem; min-height: .4rem; line-height: .4rem; padding: 0.05rem .15rem; border: 1px solid #c5c5c7; border-radius: .1rem; background-color: #fefefe; color: #000; font-size: .28rem; margin-left: .1rem; float: left;}
+section.interface>div.inputInterface>.panel span i{ font-size: .4rem; color: #8c96f5; -webkit-animation: insert 0.5s ease infinite alternate;}
+@-webkit-keyframes insert{
+	0%{opacity: 1;}
+	100%{opacity: 0;}
+}
+
+section.interface>div.inputInterface>.way{ width: 100%; height: .4rem; line-height: .4rem; padding: .15rem 0rem; border-top: 1px solid #c5c5c7; background-color: #fff; text-align: center; position: relative;}
+section.interface>div.inputInterface>.way a{color: #000; font-size: .3rem; margin: 0 .2rem;}
+section.interface>div.inputInterface>.way span{ color: #000; font-size: .4rem; margin: 0 .2rem;}
+section.interface>div.inputInterface>.way i.hand1{ left: 20%; top: .55rem;}
+section.interface>div.inputInterface>.way i.hand2{ right: 20%; top: .55rem;}
+section.interface>div.inputInterface>.way i.hand2 b{-webkit-animation: hand 2s 1s ease infinite;}
+
+section.interface>div.inputInterface>.ime{ width: 100%; height: .7rem; line-height: .7rem; position: relative; display: none;}
+section.interface>div.inputInterface>.ime span{ display: inline-block; padding: 0 .22rem; font-size: .34rem; color: #000; letter-spacing: .22rem; display: none;}
+section.interface>div.inputInterface>.ime a{ position: absolute; right: 0; top: 0; width: .75rem; height: 100%; background-image: url(../images/chat/btn_img.png); border-right: 1px solid #c5c5c7; box-shadow: 0 0.05rem 0.05rem #ccc;}
+
+
+section.interface>div.inputInterface>.keyboard{ width: 100%; height: 3.69rem; border-top: 1px solid #c5c5c7; background-color: #d1d5d8; background-image: url(../images/input/keyboard.png); position: relative;}
+section.interface>div.inputInterface>.keyboard a.btnSend{ position: absolute; right: 0.05rem; bottom: 0.05rem; width: 1.5rem; height: .75rem; background-image: url(../images/input/btn_send.png);}
+section.interface>div.inputInterface>.keyboard i.hand{ right: .1rem; bottom: -.1rem; display: none;}

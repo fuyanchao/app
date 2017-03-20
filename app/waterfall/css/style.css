@@ -1,0 +1,29 @@
+@charset "UTF-8";
+
+/* 页面部分 */
+body{ background:#f7f7f7; color:#747474;}
+
+.wrap{width:100%; margin:0px auto; clear:both;}
+
+.content{ width:90%; margin:0px auto 10px;}
+.content ul{ position:relative;}
+.content li.view{ width:150px; border:1px solid #fff; padding:4px; background:#fff; box-shadow:1px 1px 3px #ddd; position:absolute; left:0; top:0;} 
+.content li.view p{}
+.content li.view p.pic{ margin-bottom:10px;}
+.content li.view p.pic img{ width:150px; cursor:pointer;}
+.content li.view p span.topic{ float:left; color:#747474; line-height:24px;}
+.content li.view p a.vote{ float:right; display:inline-block; width:32px; height:24px; line-height:24px; padding:0px 5px 0px 25px; background:url(../images/btn_vote.png) no-repeat; color:#fff; text-align:center;}
+.content li.view i{ position:absolute; right:-10px; bottom:26px; display:block; width:150px; height:39px; background:url(../images/sign.png); _background:url(../images/sign.gif); z-index:1; display:none;}
+.content ul li.act{ width:162px; height:166px; padding:165px 0px 0px; background:#77f4c5; position:relative; }
+.content ul li.act .topic{ position:absolute; left:-3px; top:17px; width:169px; height:132px; background:url(../images/act_topic.png); _background:url(../images/act_topic.gif);}
+.content ul li.act p{ text-align:center; margin-bottom:10px;}
+.content ul li.act .btns{ position:absolute; left:0px; bottom:0px; width:162px; height:33px; background: url(../images/line1.gif) center center no-repeat #3cc486; }
+.content ul li.act .btns span{ color:#fff; font-size:14px; line-height:33px; text-shadow:1px 1px 1px #4fb07d; margin:0px 11px; cursor:pointer;}
+.content ul li.act .hand{ position:absolute; right:0px; top:170px; display:none;}
+.content .load{ width:100%; height:60px; background:url(../images/loading.gif) center center no-repeat; opacity:0.5;}
+
+.pages{ width:530px; background:#fff; margin:0px auto; text-align:center;}
+.pages a,.pages span{ color:#1bdc58; margin:0px 3px; line-height:24px; padding:2px 3px;}
+.pages a.active{ color:#fff; text-decoration:underline; background:#1bdc58;}
+.pages a.step:hover{color:#fff; text-decoration:underline; background:#1bdc58;}
+

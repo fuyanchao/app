@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>全景VR</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+/* load浮层 */
+.loadAssetBox{ position:absolute;display:block left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:996;}
+.loadAssetBox>span{ display:block; position:absolute; left:50%; top:50%; margin-left:-0.1rem; margin-top:-0.2rem; -webkit-transform:scale(0.2); -webkit-transform-origin: 50% 50%;}
+.loadAssetBox>span i{ display:block; position:absolute; left:0; top:0; width:0.4rem; height:0.1rem; border-radius:0.08rem; background:rgba(255,255,255,0.5); box-shadow:0 0 0.1rem rgba(255,255,255,1);}
+.loadAssetBox>span i:nth-child(1){ -webkit-transform:translate(0.6rem, 0) rotate(0deg); -webkit-animation:loadCircle 2.4s 0s linear infinite;}
+.loadAssetBox>span i:nth-child(2){ -webkit-transform:translate(0.5196rem, 0.3rem) rotate(30deg); -webkit-animation:loadCircle 2.4s 0.2s linear infinite;}
+.loadAssetBox>span i:nth-child(3){ -webkit-transform:translate(0.3rem, 0.5196rem) rotate(60deg); -webkit-animation:loadCircle 2.4s 0.4s linear infinite;}
+.loadAssetBox>span i:nth-child(4){ -webkit-transform:translate(0, 0.6rem) rotate(90deg); -webkit-animation:loadCircle 2.4s 0.6s linear infinite;}
+.loadAssetBox>span i:nth-child(5){ -webkit-transform:translate(-0.3rem, 0.5196rem) rotate(120deg); -webkit-animation:loadCircle 2.4s 0.8s linear infinite;}
+.loadAssetBox>span i:nth-child(6){ -webkit-transform:translate(-0.5196rem, 0.3rem) rotate(150deg); -webkit-animation:loadCircle 2.4s 1.0s linear infinite;}
+.loadAssetBox>span i:nth-child(7){ -webkit-transform:translate(-0.6rem, 0) rotate(180deg); -webkit-animation:loadCircle 2.4s 1.2s linear infinite;}
+.loadAssetBox>span i:nth-child(8){ -webkit-transform:translate(-0.5196rem, -0.3rem) rotate(210deg); -webkit-animation:loadCircle 2.4s 1.4s linear infinite;}
+.loadAssetBox>span i:nth-child(9){ -webkit-transform:translate(-0.3rem, -0.5196rem) rotate(240deg); -webkit-animation:loadCircle 2.4s 1.6s linear infinite;}
+.loadAssetBox>span i:nth-child(10){ -webkit-transform:translate(0, -0.6rem) rotate(270deg); -webkit-animation:loadCircle 2.4s 1.8s linear infinite;}
+.loadAssetBox>span i:nth-child(11){ -webkit-transform:translate(0.3rem, -0.5196rem) rotate(300deg); -webkit-animation:loadCircle 2.4s 2.0s linear infinite;}
+.loadAssetBox>span i:nth-child(12){ -webkit-transform:translate(0.5196rem, -0.3rem) rotate(330deg); -webkit-animation:loadCircle 2.4s 2.2s linear infinite;}
+.loadAssetBox>b{ display:block; position:absolute; left:0; top:50%; width:100%; height:0.4rem; line-height:0.4rem; margin-left:-0.1rem; margin-top:-0.34rem; text-align:center; font-size:0.2rem; color:rgba(255,255,255,0.7);}
+@-webkit-keyframes loadCircle{0%{opacity:1}8.3%{opacity:0}50%{opacity:1}100%{opacity:1}}
+
+article{ display: flex;}
+.pano{height:100%; position:relative; overflow:hidden; flex: 1;}
+.pano>.scene{position:absolute; left:0; top:0; width:100%; height:100%;}
+.pano>.scene div{will-change:transform;}
+.pano>.canvas{position:absolute; left:0; top:0; width:100%; height:100%;}
+.pano>.hot{ position:absolute; left:0; top:0; width:100%; height:100%;}
+.pano>.hot span{ display:block; position:absolute; left:0; top:0; width:.4rem; height:.4rem; margin-left: -.2rem; margin-top: -.2rem; background:rgba(255,255,255,0.7); border-radius:50%; box-shadow:0 0 .1rem #333; visibility:hidden; will-change:transform;}
+.pano>.hot span i{ position:absolute; left:-1px; top:-1px; width:100%; height:100%; border-radius:50%; border:1px solid #fff; -webkit-animation:hot 2s ease infinite; will-change:transform;}
+.pano>.cross{ position:absolute; left:50%; top:50%; width:.1rem; height:.1rem; margin-left: -.05rem; margin-top: -.05rem; background:rgba(255,0,0,0.8); border-radius:50%; box-shadow:0 0 .1rem #333; border:1px solid rgba(255,255,255,0.5);}
+.pano>.info{ position: absolute; right: 0.1rem; top: 45%; width: 1.2rem; padding: 0.1rem 0.1rem; background-color: rgba(0,0,0,0.7); border: 1px solid rgba(0,0,0,0.5); border-radius:0.1rem; box-shadow:0 0 .1rem #333; display: none;}
+.pano>.info p{color: #fff; font-size: 0.18rem; line-height: 0.18rem; text-align: center;}
+.pano>.info h4{ color: #ff0000; font-size: 0.24rem; line-height: 0.24rem; text-align: center; margin-top: 0.1rem;}
+.pano>.focus{ position: absolute; left: 50%; top: 50%; width: 200%; height: 200%; margin-left: -100%; margin-top: -100%; background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,0) 0%,rgba(255,255,255,0) 10%,rgba(255,255,255,1) 80%); display: none;}
+
+@-webkit-keyframes hot{
+	0%{ opacity:1; -webkit-transform:scale(1);}
+	100%{opacity:0; -webkit-transform:scale(2);}
+}
+
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<article class="vr"></article>
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="r71/three.min.js"></script>
+<script src="r71/CSS3DRenderer.js"></script>
+<script src="js/loader/MTLLoader.js" ></script>
+<script src="js/loader/OBJLoader.js" ></script>
+<script src="js/loader/DDSLoader.js" ></script>
+<script src="js/loader/OBJMTLLoader.js" ></script>
+<script src="js/OrbitControls.js" ></script>
+<script src="js/test.js"></script>
+<script src="js/iphone.pano.vr.js"></script>
+<script>
+
+
+//compass
+var compassPanel=$('<div id="compassPanel"><h3>电子罗盘</h3><p>alpha：<span class="alpha"></span></p><p>beta：<span class="beta"></span></p><p>gamma：<span class="gamma"></span></p><p>指北针：<span class="heading"></span></p>').appendTo($('body'));
+var compassAlpha=compassPanel.find('.alpha');
+var compassBeta=compassPanel.find('.beta');
+var compassGamma=compassPanel.find('.gamma');
+var compassHeading=compassPanel.find('.heading');
+//compassPanel.show();
+
+/*var hotList=[
+	{pan:-2,tilt:-17,label:'中控仪表台',vx:-0.05,vy:-0.45,vz:0},
+	{pan:-2,tilt:10,label:'后视镜',vx:-0.05,vy:0.15,vz:0},
+	{pan:204,tilt:-166,label:'驾驶方向盘',vx:0.55,vy:-0.4,vz:0},
+	{pan:-203,tilt:200,label:'副驾驶储物柜',vx:-0.53,vy:-0.55,vz:0},
+	{pan:-293,tilt:202,label:'后门',vx:-1.55,vy:-0.65,vz:-1.55},
+	{pan:2,tilt:146,label:'后顶灯',vx:-0.05,vy:0.72,vz:-2},
+	{pan:2,tilt:190,label:'后排座椅',vx:-0.05,vy:-0.3,vz:-2}
+];*/
+var hotList=[
+	{pan:-2,tilt:-17,label:'火锅1',vx:-0.05,vy:-0.45,vz:0},
+	{pan:-2,tilt:10,label:'火锅2',vx:-0.05,vy:0.15,vz:0},
+	{pan:204,tilt:-166,label:'火锅3',vx:0.55,vy:-0.4,vz:0},
+	{pan:-203,tilt:200,label:'火锅4',vx:-0.53,vy:-0.55,vz:0},
+	{pan:-293,tilt:202,label:'火锅5',vx:-1.55,vy:-0.65,vz:-1.55},
+	{pan:2,tilt:146,label:'火锅6',vx:-0.05,vy:0.72,vz:-2},
+	{pan:2,tilt:190,label:'火锅7',vx:-0.05,vy:-0.3,vz:-2}
+];
+
+
+$(document).ready(function(e) {
+	
+	icom.screenScrollUnable();
+	
+	//pano
+	var vrBox=$('.vr');
+	var panoBox=$('.pano');
+	var imageList=['images/stage/stage_left.jpg','images/stage/stage_front.jpg','images/stage/stage_right.jpg','images/stage/stage_back.jpg','images/stage/stage_top.jpg','images/stage/stage_bottom.jpg'];
+	<!-- var imageList=['images/car/left.jpg','images/car/front.jpg','images/car/right.jpg','images/car/back.jpg','images/car/top.jpg','images/car/bottom.jpg'];  -->
+	
+
+	init();
+	
+	function init(){
+		vrBox.panoOn({image:imageList,distance:45,compass:true,hot:hotList});
+	}//end func
+	
+	
+});
+	
+</script>
+</body>
+</html>

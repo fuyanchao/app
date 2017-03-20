@@ -1,0 +1,223 @@
+@charset "UTF-8";
+/* ----------------------------------------css base---------------------------------------- */
+* {margin:0;padding:0; border:0; word-break:break-all;}
+html {-webkit-text-size-adjust: 100%;}/*取消字体自动缩放*/
+table{border-collapse:collapse;border-spacing:0;}
+address,caption, cite,code,dfn,em,strong,th,var,h1,h2,h3,h4,h5,h6,i,em,cite{font-style:normal;font-weight:normal;}
+ol,ul,li {list-style-type:none; display:block;}
+select,input,img{vertical-align:middle;border:none;outline:none;}
+textarea {resize: none;} /*webkit核心中textare取消拖动调整大小*/
+textarea:focus {outline: none;} /*textarea聚焦时默认边框颜色不变*/
+video{ background:#000;}
+a{ text-decoration:none; display:inline-block;}
+.clearFix {display: block;}
+.clearFix:after {clear: both;content: ".";display: block;height: 0;visibility: hidden;}
+.fl{float:left;display:inline;}
+.fr{float:right;display:inline;}
+.img100>img{ width:100%;}
+.bg100{ background-size:100% 100%;}
+.no_event{pointer-events:none;}
+.arial{font-family:Arial;}
+.none{ display:none;}
+
+
+/*media font-size*/
+@media screen{html{font-size:10px;}}
+@media screen and (device-width:320px){html{font-size:10px;}}
+@media screen and (device-width:375px){html{font-size:11.7px;}}
+@media screen and (device-width:414px){html{font-size:13px;}}
+@media screen and (min-width:480px){html{font-size:15px;}}
+@media screen and (min-width:512px){html{font-size:16px;}}
+@media screen and (min-width:540px){html{font-size:17px;}}
+@media screen and (min-width:576px){html{font-size:18px;}}
+@media screen and (min-width:640px){html{font-size:20px;}}
+@media screen and (min-width:720px){html{font-size:22.5px;}}
+@media screen and (min-width:800px){html{font-size:25px;}}
+
+
+/* iphone版微信工具栏高度是127像素(IP4-IP5S)；android版微信工具栏高度是110像素； */
+/* 默认CSS适配 16:9标准屏幕 */
+/* iphone5/5s screen:320x568/weixin:320x504 */
+/* iphone6 safari:375×667/weixin:320x504 */
+/* iphone6 plus safari:414×736/weixin:320x504 */
+/* android screen:480x854/weixin:480x744 */
+/* android screen:540x960/weixin:540x850 */
+
+/* ----------------------------------------公共部分---------------------------------------- */
+
+/* 旋转浮层*/
+#turnBox{ width:100%; height:100%; background:#222; position:absolute; left:0; top:0; z-index:1001; display:none;}
+#turnBox span{ position:absolute; display:block; left:25%; top:10%; width:50%; height:80%; background:url(../images/common/turn.png) center center no-repeat; background-size: contain;}
+
+#turnBoxHor{ width:100%; height:100%; background:#1a0f1b; position:absolute; left:0; top:0; z-index:1001; display:none;}
+#turnBoxHor span{ position:absolute; display:block; left:10%; top:10%; width:80%; height:80%; background: url(../images/common/turn_hor.png) center center no-repeat; background-size: contain;}
+
+/* load浮层*/
+#loadBox{ position:absolute; left:0; top:0; width:100%; height:100%; background: linear-gradient(to bottom, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); background: -webkit-linear-gradient(top, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); z-index:999;}
+#loadBox span{ opacity:0.5; display:block; position:absolute; left:50%; top:50%; margin-left:-1.5em; margin-top:-1.5em; width:3em; height:3em; line-height:3em; background: url(../images/common/loading.gif) no-repeat; background-size:contain; font-size:1em; text-align:center; }
+
+/* 分享浮层*/
+#shareBox{width:100%; height:100%; position:absolute; left:0; top:0; background:rgba(0,0,0,0.85); display:none;}
+#shareBox>img.sign{ display:block; width:75%; margin:20% auto 0;}
+#shareBox>img.logo{ position:absolute; left:50%; bottom:6%; width:28%; margin-left:-14%;}
+
+/* 取代系统alert的警告提示弹窗*/
+#alertBox{ position:absolute; background:#fff; width:70%; padding:2em 0; border-radius:1em; box-shadow:0 0 1em #000; z-index:998; display:none;}
+#alertBox h3{ text-align:center; margin-bottom:2em; font-size:1.8em; line-height:1.8em; color:#6699cc;}
+#alertBox h3 img{ width:25%; vertical-align:middle; margin:0 5%;}
+#alertBox p{ text-align:center;}
+#alertBox p.text{ margin-bottom:2em; font-size:1.6em; color:#222;}
+#alertBox p.btn a{ font-size:1.6em; padding:0.5em 2em; color:#fff; background:#222; letter-spacing:0.2em; border-radius:0.3em;}
+
+/* 视频*/
+#videoBox{position:absolute; left:0; top:0; width:100%; height:100%; background:#000; z-index:996; display:none;}
+#videoBox iframe{width:100%;}
+#videoBox video{ width:100%;}
+#videoBox a.close{ position:absolute; right:1em; top:1em; width:3em; height:3em; background: url(../images/common/close.png); background-size:100% 100%;}
+a.btnVideo iframe,a.btnVideo video{ position:absolute; left:0; top:0; width:100%; height:100%; opacity:0; }
+
+/* 弹窗外壳*/
+.popBox{position:absolute; width:100%; height:100%; left:0px; top:0px; background:rgba(0,0,0,0.7);}
+
+/* 遮罩层*/
+.maskBox{ position:absolute; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:9; display:none;}
+.whiteBox{ position:absolute; left:0; top:0; width:100%; height:100%; background:#fff; z-index:9; display:none;}
+.blackBox{ position:absolute; left:0; top:0; width:100%; height:100%; background:#000; z-index:9; display:none;}
+.blankBox{ background-image: url(../images/common/blank.png); z-index:9; background-size:100% 100%;}
+
+/* 照片文件选择框*/
+#fileBox{ position:absolute; right:0; bottom:0; opacity:0; width:1px; height:1px; overflow:hidden;}
+
+/* 电子罗盘数据面板*/
+#compassPanel{ width:40%; background:rgba(0,0,0,0.5); position:absolute; right:0; top:0; display:none;}
+#compassPanel h3{color:#fff; background:rgba(255,255,255,0.2); padding:0.5em 1em; margin-bottom:0.5em;}
+#compassPanel p{ color:#fff; font-size:1.1em; margin-bottom:0.5em; margin-left:1em;}
+#compassPanel p input[type=text]{ -webkit-appearance:none;}
+
+.wrap{ width:100%; overflow:hidden; position:relative;}
+.wrap>article,.wrap>section{ width:100%; height:100%; background-size:100% 100%; overflow:hidden; position:relative;}
+
+
+body{ background: linear-gradient(to bottom, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); background: -webkit-linear-gradient(top, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); color:#fff;}
+a{ color:#fff;}
+a>img{ width:100%;}
+
+/* ----------------------------------------内容部分----------------------------------------*/
+
+article.container{ height:auto;}
+
+section{ background-position:top center; background-size:cover; position:relative; overflow:hidden;}
+section>h3,section>h4,section>img{ position:absolute; background-size:100% 100%; display:block;}
+section>h3>img,section>h4>img{ width:100%;}
+section>.bg{ width:100%; height:100%; background-position:center center; background-size:cover;}
+
+section.index{ background: linear-gradient(to bottom, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); background: -webkit-linear-gradient(top, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%);}
+section.index img.logo{ position:absolute; left:50%; top:12%; width:36%; margin-left:-18%;}
+section.index .slog{ position:absolute; left:0; top:36%; width:100%; opacity:0; transform:scale(0.9); -webkit-transform:scale(0.9);}
+section.index .slog p{ text-align:center;}
+section.index .slog p.img{ margin-bottom:1.5em;}
+section.index .slog p.img img{width:60%;}
+section.index .slog p.txt{ font-size:2.0em; }
+section.index .slog p.txt span{ text-transform:uppercase; font-family:Arial;}
+section.index img.ar{ position:absolute; left:50%; bottom:6%; width:10%; margin-left:-5%; -webkit-animation:ar 2s ease-in-out infinite;}
+
+section.page_a{ background: linear-gradient(to bottom, rgba(245,245,246,1) 0%,rgba(198,201,206,1) 100%); background: -webkit-linear-gradient(top, rgba(245,245,246,1) 0%,rgba(198,201,206,1) 100%);}
+section.page_a>h3{ left:0%; bottom:0%; width:36%;}
+section.page_a>h4{ left:23%; bottom:13%; width:54%;}
+section.page_a>img.p1{ left:19%; top:0%; width:16%;}
+section.page_a>img.p2{ left:50%; top:0%; width:26%;}
+section.page_a>img.p3{ left:30%; top:2%; width:10%;}
+
+section.page_b{ background: linear-gradient(to bottom, rgba(32,42,55,1) 0%,rgba(2,2,3,1) 100%); background: -webkit-linear-gradient(top, rgba(32,42,55,1) 0%,rgba(2,2,3,1) 100%);}
+section.page_b>h3{ left:56%; top:0%; width:35%;}
+section.page_b>h4{ right:46%; top:2%; width:44%;}
+section.page_b>img.p1{ left:15%; bottom:0%; width:64%;}
+section.page_b>img.p2{ left:39%; bottom:25%; width:40%;}
+
+section.page_c{ background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(184,188,192,1) 100%); background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(184,188,192,1) 100%);}
+section.page_c>h3{ left:0%; bottom:0%; width:55%;}
+section.page_c>h4{ left:14%; bottom:14%; width:52%;}
+section.page_c>img.p1{ left:18%; top:0%; width:60%;}
+
+section.end{ background: linear-gradient(to bottom, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%); background: -webkit-linear-gradient(top, rgba(1,1,2,1) 0%,rgba(31,41,54,1) 100%);}
+section.end img.logo{ position:absolute; left:50%; top:35%; width:80%; margin-left:-40%;}
+
+/*弹出层*/
+aside{ position:absolute; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0.5); display:none;}
+aside>a.close{ position:absolute; right:1.5em; top:1.5em; width:2em; height:2em; background:url(../images/common/close.png); background-size:100% 100%;}
+
+/*弹出层样板*/
+aside.pop{ position:absolute; width:80%; padding:2em 0; background:url(../images/common/pop_bg.png); background-size:100% 100%; display:none;}
+
+
+/*-----------------------------------------css3 media --------------------------------------------*/
+
+/*------------------ 针对16:9的标准屏，如苹果iphone5以上，有物理系统按键的16:9安卓机（如三星系列）------------------*/
+/* iphone5/5s screen:320x568/weixin:320x504 */
+/* iphone6 safari:375×667/weixin:320x504 */
+/* iphone6 plus safari:414×736/weixin:320x504 */
+/* android screen:480x854/weixin:480x744 */
+/* android screen:540x960/weixin:540x850 */
+/*
+@media screen and (device-width:320px) and (max-height:568px),screen and (device-width:375px),screen and (device-width:414px), screen and (width:480px) and (max-height:854px), screen and (width:540px) and (max-height:960px){
+
+}
+*/
+
+/*------------------ 针对非16:9的短屏，如苹果iphone4，480x800的最低端安卓机、无物理按键的16:9安卓机（如sony系列）------------------*/
+/* iphone4/4s screen:320x480/weixin:320x416 */
+/* android screen:480x800/weixin:480x690 */
+/* android screen:540x890/weixin:540x780 */
+@media screen and (device-width:320px) and (max-height:480px), screen and (width:480px) and (max-height:690px), screen and (width:540px) and (max-height:780px){
+
+
+section.page_a>h3{ width:32%;}
+section.page_a>h4{ bottom:7%; width:54%;}
+section.page_a>img.p1{ left:19%; top:0%; width:14%;}
+section.page_a>img.p2{ left:50%; top:0%; width:22%;}
+section.page_a>img.p3{ left:30%; top:2%; width:10%;}
+
+section.page_b>h3{ width:28%;}
+section.page_b>h4{ width:38%;}
+section.page_b>img.p1{ left:25%; bottom:0%; width:52%;}
+section.page_b>img.p2{ left:42%; bottom:25%; width:34%;}
+
+section.page_c>h3{ width:50%;}
+section.page_c>h4{ left:14%; bottom:14%; width:48%;}
+section.page_c>img.p1{ left:30%; top:0%; width:45%;}
+
+}
+
+
+
+/*------------------ 针对iphone全系列 ------------------*/
+@media screen and (device-width:320px) and (device-height:480px), screen and (device-width:320px) and (device-height:568px), screen and (device-width:375px) and (device-height:667px), screen and (device-width:414px) and (device-height:736px){
+
+}
+
+/*------------------ 针对iphone4 only ------------------*/
+@media screen and (device-width:320px) and (device-height:480px){
+
+}
+
+
+/*----------------------------------------- css3 animate -----------------------------------------*/
+
+@-webkit-keyframes fade1{
+	0%{ opacity:1;}
+	50%{opacity:0;}
+	100%{opacity:1;}
+}
+
+@-webkit-keyframes fade2{
+	0%{ opacity:1;}
+	25%{opacity:0;}
+	50%{opacity:1;}
+}
+
+@-webkit-keyframes ar{
+	0%{ -webkit-transform:translateY(0);}
+	50%{ -webkit-transform:translateY(-1em);}
+	100%{ -webkit-transform:translateY(0);}
+}
+

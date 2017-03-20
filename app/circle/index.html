@@ -1,0 +1,123 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<title>3D滚筒</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,target-densitydpi=device-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+<script src="../../iphone/js/base/base.js"></script>
+<link rel="stylesheet" href="../../iphone/css/common.css" />
+<style>
+	
+</style>
+</head>
+<body>
+<!--------------------------------------------------------------html区域-------------------------------------------------------------------------------------->
+<style type="text/css">
+body{ background: #ccc;}
+.circle{width:100%; height:40%; overflow: hidden; position:relative;}
+.circle img{  position:absolute; left:0; top:0; width:1.8rem; height: 2.6rem; box-shadow: 0 0 0.1rem #333; display: none; will-change:transform;}
+.panel{ text-align: center;}
+.panel a{ width: 20%; height: .6rem; line-height: .6rem; background: #000; color: #fff; text-align: center; font-size: .28rem; margin: .1rem .1rem;}
+</style>
+
+
+<div class="circle">
+    <img src="images/p1.jpg" />
+    <img src="images/p2.jpg" />
+    <img src="images/p3.jpg" />
+    <img src="images/p4.jpg" />
+    <img src="images/p5.jpg" />
+    <img src="images/p6.jpg" />
+</div>
+<div class="panel">
+	<a class="btnLeft">向左</a>
+	<a class="btnRight">向右</a>
+	<a class="btnStop">停止</a>
+	<a class="btnPlay">继续</a>
+</div>
+<div class="circle">
+    <img src="images/p1.jpg" />
+    <img src="images/p2.jpg" />
+    <img src="images/p3.jpg" />
+    <img src="images/p4.jpg" />
+    <img src="images/p5.jpg" />
+    <img src="images/p6.jpg" />
+</div>
+<div class="panel">
+	<a class="btnLeft">向左</a>
+	<a class="btnRight">向右</a>
+	<a class="btnStop">停止</a>
+	<a class="btnPlay">继续</a>
+</div>
+
+<!--------------------------------------------------------------javascript区域-------------------------------------------------------------------------------------->
+<script src="../../iphone/js/base/jquery.js"></script>
+<script src="../../iphone/js/base/framwork.js"></script>
+<script src="js/widget/iphone.circle.js"></script> 
+<script>
+$(document).ready(function(e) {
+	
+	/*
+	 * circleOn(option)：开启插件
+		 * 参数：
+		 * rx：x轴半径，默认值宽度的50%
+		 * ry：y轴半径，默认值高度的25%
+		 * speed：滚动速度，默认值3
+		 * delay：滚动延迟，默认值5000
+		 * auto:是否自动滚动
+		 * blur：开启景深模糊效果，默认值false
+		 * fps：滚动fps，默认值30
+		 * focus:焦点图式滚动，默认值true
+		 * offsetX:圆心偏移值X
+		 * offsetY：圆心偏移值Y
+		 * onComplete:转一下的回调函数,传递转到正中的当前对象ID
+		 * onOff:插件关闭的回调函数,传递引用插件的jquery对象
+	 * 
+	 * circleLeft():向左滚动
+	 * 
+	 * circleRight():向右滚动
+	 * 
+	 * circleStop():停止自动滚动
+	 * 
+	 * circlePlay():开始自动滚动
+	 * 
+	 * circleOff():关闭插件
+	 * 
+	 */
+	
+	var circleBox=$(".circle");
+	
+	//焦点图式滚动
+	circleBox.eq(0).circleOn({rx:circleBox.eq(0).width()*0.35,ry:circleBox.eq(0).height()*0.1,auto:true,blur:true,delay:1000,speed:10});
+	
+	//连续滚动
+	circleBox.eq(1).circleOn({rx:circleBox.eq(1).width()*0.35,ry:circleBox.eq(1).height()*0.3,speed:1,focus:false});
+	
+	$('a.btnLeft').on('touchend',function(e){
+		var id=$(this).parent().index('.panel');
+		circleBox.eq(id).circleLeft();
+	});
+	
+	$('a.btnRight').on('touchend',function(e){
+		var id=$(this).parent().index('.panel');
+		circleBox.eq(id).circleRight();
+	});
+	
+	$('a.btnStop').on('touchend',function(e){
+		var id=$(this).parent().index('.panel');
+		circleBox.eq(id).circleStop();
+	});
+	
+	$('a.btnPlay').on('touchend',function(e){
+		var id=$(this).parent().index('.panel');
+		circleBox.eq(id).circlePlay();
+	});
+
+});
+</script>
+</body>
+</html>
